@@ -24,7 +24,6 @@ public:
         for(int i=1; i<=(end-start); i++) {
             if(start[i].istop)
                 start[i].istop=false;
-            // printf("start[i]: %d\n", start[i].val);
             s_ij+=(bound-start[i].val)>0?bound-start[i].val:0;
             start[i].val=top[0]->val;
         }
