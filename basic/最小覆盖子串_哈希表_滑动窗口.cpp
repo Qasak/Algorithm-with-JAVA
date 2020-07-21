@@ -31,7 +31,9 @@ public:
                     min_right=right;
                     min_len=right-left+1;
                 }
-                tmp[s[left++]]--;
+                if(tmp.find(s[left])!=tmp.end())
+                    tmp[s[left]]--;
+                left++;
             }
             ++right;
 
