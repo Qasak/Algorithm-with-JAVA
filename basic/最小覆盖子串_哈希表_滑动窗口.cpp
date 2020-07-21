@@ -33,7 +33,7 @@ public:
                 }
                 if(tmp.find(s[left])!=tmp.end())
                     tmp[s[left]]--;
-                left++;
+                ++left;
             }
             ++right;
 
