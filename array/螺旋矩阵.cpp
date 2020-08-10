@@ -22,12 +22,7 @@ public:
             flag[0][j]=1;
             flag[n+1][j]=1;
         }
-        // for(int i=0;i<=n+1;i++) {
-        //     for(int j=0;j<=m+1;j++) {
-        //         cout<<flag[i][j]<<" ";
-        //     } 
-        //     cout<<endl;
-        // }
+
 
         int forward=0;
         int i=1;
