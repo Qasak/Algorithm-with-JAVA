@@ -6,10 +6,9 @@ public:
             return ans;
         int n=nums.size();
         int prod=1;
-        ans.push_back(1);
-        for(int i=1;i<n;i++) {
-            prod*=nums[i-1];
-            ans.push_back(prod);
+        for(int i=0;i<n;i++) {
+			ans.push_back(prod);
+            prod*=nums[i];
         }
         prod=1;
         for(int i=n-1;i>=0;i--) {
