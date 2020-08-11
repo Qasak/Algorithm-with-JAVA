@@ -16,5 +16,3 @@ class Solution:
                 if num < 1000**(p + 1):
                     return helper(num//(1000**p)) + [w] + helper(num % (1000**p))
         return ' '.join(helper(num)) or 'Zero'
-
-
