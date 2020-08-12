@@ -18,20 +18,14 @@ public:
     }
 };
 
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
+
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode* pre=nullptr;
-        ListNode* cur=head;
-        ListNode* nxt=head;
+        ListNode* pre,*cur,*nxt;
+        pre=nullptr;
+        cur=head;
+        nxt=head;
         while(cur) {
             nxt=cur->next;
             cur->next=pre;
