@@ -33,10 +33,7 @@ public:
         sort(meeting.begin(), meeting.end(), cmp);
 
 
-        set<edge> a;
-        a.insert(edge{meeting[0].first, meeting[0].second});
-        rooms.push_back(a);
-        for(int i=1; i<n; i++) {
+        for(int i=0; i<n; i++) {
             edge tmp={meeting[i].first, meeting[i].second};
             set<edge>::iterator it;
             bool flag=false;
