@@ -22,7 +22,7 @@ public:
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode* pre,*cur,*nxt;
+        ListNode *pre,*cur,*nxt;
         pre=nullptr;
         cur=head;
         nxt=head;
