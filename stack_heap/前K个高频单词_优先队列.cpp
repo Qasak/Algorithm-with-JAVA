@@ -17,14 +17,11 @@ public:
         }
 
         priority_queue<pii, vector<pii>, Cmp> pq;
-        Cmp cmp;
         for(const auto &item:word_freq) {
             pii tmp{item.first, item.second};
-            if(pq.size()<k) pq.push(tmp);
-            else if(cmp(tmp, pq.top())) {
-                pq.pop();
-                pq.push(tmp);
-            }
+			pq.push(tmp);							// 直接push，不用比较和top的大小
+			if(pq.size()>k)
+				pq.pop();
         }
         while(k--) {
             ans.push_back(pq.top().first);
