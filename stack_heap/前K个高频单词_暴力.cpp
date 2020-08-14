@@ -7,11 +7,7 @@ public:
         map<string, int> m;
         vector<pair<string, int> > tmp;
         vector<string> ans;
-        map<string, int>::iterator it;
         for(auto &word: words) {
-            it=m.find(word);
-            if(it==m.end()) 
-                m[word]=0;
             m[word]++;
         }
         for(const auto &i:m) {
