@@ -14,10 +14,9 @@ public:
             tmp.push_back(make_pair(i.first, i.second));
         }
         stable_sort(tmp.begin(), tmp.end(), cmp);
-        vector<pair<string, int> >::iterator it_t = tmp.begin();
-        for(int i=0; i<k; i++) {
-            ans.push_back(it_t->first);
-            it_t++;
+        for(const auto &item:tmp) {
+            if(k--==0) break;
+            ans.push_back(item.first);
         }
         return ans;
     }
