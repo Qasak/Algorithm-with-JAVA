@@ -1,28 +1,37 @@
-bool cmp (const pair<string, int> &a, const pair<string, int> &b) {
-    return a.second>b.second;
-}
+typedef pair<string, int> pii;
+struct Cmp {
+    bool operator() (const pii &a, const pii &b) {
+        if(a.second==b.second) return a.first<b.first;
+        else return a.second>b.second;
+    }
+};
+
+
 class Solution {
 public:
     vector<string> topKFrequent(vector<string>& words, int k) {
-        map<string, int> m;
-        vector<pair<string, int> > tmp;
+        map<string, int> word_freq;
         vector<string> ans;
-        map<string, int>::iterator it;
         for(auto &word: words) {
-            it=m.find(word);
-            if(it==m.end()) 
-                m[word]=0;
-            m[word]++;
+            word_freq[word]++;
         }
-        for(const auto &i:m) {
-            tmp.push_back(make_pair(i.first, i.second));
+
+        priority_queue<pii, vector<pii>, Cmp> pq;
+        Cmp cmp;
+        for(const auto &item:word_freq) {
+            pii tmp{item.first, item.second};
+            if(pq.size()<k) pq.push(tmp);
+            else if(cmp(tmp, pq.top())) {
+                pq.pop();
+                pq.push(tmp);
+            }
         }
-        stable_sort(tmp.begin(), tmp.end(), cmp);
-        vector<pair<string, int> >::iterator it_t = tmp.begin();
-        for(int i=0; i<k; i++) {
-            ans.push_back(it_t->first);
-            it_t++;
+        while(k--) {
+            ans.push_back(pq.top().first);
+            pq.pop();
         }
+        reverse(ans.begin(), ans.end());
+
         return ans;
     }
 };
