@@ -21,25 +21,23 @@ public:
         int n=nums.size();
         sort(nums.begin(), nums.end());
         vector<vector<int>> ans;
-        int left=0;
-        int right=n-1;
         int target=0;
-        while(left+1<right) {
-            int i=left+1;
-            int j=right;
-            target=-nums[left];
-            while(i<j) {
-                if(nums[i]+nums[j]<target)
-                    i++;
-                else if(nums[i]+nums[j]>target)
-                    j--;
+        for(int i=0; i<n-2; ) {
+			target=-nums[i];
+            int l=i+1;
+            int r=n-1;
+            while(l<r) {
+                if(nums[l]+nums[r]<target)
+                    l++;
+                else if(nums[l]+nums[r]>target)
+                    r--;
                 else {
-                    ans.push_back({nums[left], nums[i], nums[j]});
-                    while(nums[i]==nums[++i]&&i<j);
-                    while(nums[j]==nums[--j]&&i<j);
+                    ans.push_back({nums[i], nums[l], nums[r]});
+                    while(nums[l]==nums[++l]&&l<r);
+                    while(nums[r]==nums[--r]&&l<r);
                 }
             }
-            while(nums[left]==nums[++left]&&left+1<right);
+            while(nums[i]==nums[++i]&&i<n-2);
         }
 
         return ans;
