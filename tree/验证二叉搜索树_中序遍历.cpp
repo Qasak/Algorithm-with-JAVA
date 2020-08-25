@@ -7,9 +7,7 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-#define MAX_INT ((unsigned)(-1)>>1)
 
-#define MIN_INT (~MAX_INT)
 
 class Solution {
 public:
