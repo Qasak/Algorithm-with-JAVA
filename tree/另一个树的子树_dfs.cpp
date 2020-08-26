@@ -53,53 +53,30 @@
  
 class Solution {
 public:
-    vector<int> T;
-    vector<int> S;
-    const int MIN_INT=1<<31;
-    void to_vec_pre(TreeNode* root, vector<int> &tmp) {
-        if(!root) {
-            tmp.push_back(MIN_INT);
-            return;
-        }
-        tmp.push_back(root->val);
-        to_vec_pre(root->left, tmp);
-        to_vec_pre(root->right, tmp);
+    bool check(TreeNode* s, TreeNode* t) {
+        if(!s && !t)
+            return true;
+        if((!s && t) || (s && !t) || (s->val!=t->val))
+            return false;
+        return check(s->left, t->left) && check(s->right, t->right);
     }
-    void to_vec_post(TreeNode* root, vector<int> &tmp) {
-        if(!root) {
-            tmp.push_back(MIN_INT);
-            return;
-        }
-        to_vec_post(root->left, tmp);
-        to_vec_post(root->right, tmp);
-        tmp.push_back(root->val);
-    }
-    bool check() {
-        int i,j;
-        i=j=0;
-        while(i<S.size()) {
-            while(i<S.size() && S[i]!=T[j]) i++;
-            while(i<S.size() && j < T.size() && S[i]==T[j]) {
-                i++;
-                j++;
-            }
-            if(j==T.size())
-                return true;
-            i=i-j+1;
-            j=0;
-        }
-        return false;
+    bool dfs(TreeNode* s, TreeNode* t) {
+        if(!s)
+            return false;
+        return check(s,t) || dfs(s->left, t) || dfs(s->right, t);
     }
     bool isSubtree(TreeNode* s, TreeNode* t) {
-        to_vec_pre(s,S);
-        to_vec_pre(t,T);
-        bool flag1=check();
-        S.clear();
-        T.clear();
-        to_vec_post(s,S);
-        to_vec_post(t,T);
-        bool flag2=check();
-        return flag1 && flag2;
-
+        return dfs(s, t);
     }
 };
+
+
+/*
+时间复杂度：对于每一个 s 上的点，都需要做一次 DFS 来和 t 匹配，
+匹配一次的时间代价是 O(t)，那么总的时间代价就是 O(∣s∣×∣t∣)。
+故渐进时间复杂度为 O(∣s∣×∣t∣)。 
+空间复杂度：假设 s 深度为 d_s ​ ，t 的深度为 d_t ​ ，
+任意时刻栈空间的最大使用代价是 O(\max \{ d_s, d_t \})。
+故渐进空间复杂度为 O(max{d s ​ ,d t ​ })。 
+*/
+
