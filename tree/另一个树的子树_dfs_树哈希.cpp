@@ -3,17 +3,23 @@ public:
     static constexpr int MAX_N = 1000 + 5;
     static constexpr int MOD = int(1E9) + 7;
 
-    bool vis[MAX_N];
-    int p[MAX_N], tot;
+    vector<bool> flag=vector<bool>(MAX_N, true);
+    vector<int> p=vector<int>(MAX_N);
     void getPrime() {
-        vis[0] = vis[1] = 1; tot = 0;
-        for (int i = 2; i < MAX_N; ++i) {
-            if (!vis[i]) p[++tot] = i;
-            for (int j = 1; j <= tot && i * p[j] < MAX_N; ++j) {
-                vis[i * p[j]] = 1;
-                if (i % p[j] == 0) break;
-            }
+        flag[0] = flag[1] = false;
+        for (int i = 2; i < sqrt(MAX_N); ++i) {
+            if(flag[i]) {
+				for (int j = i*i; j <= MAX_N; j+=i) {
+					flag[j]=false;
+				}
+			}
         }
+		for(int i=0,j=0; i<flag.size();++i) {
+			if(flag[i]) {
+                p[j]=i;
+                j++;
+            }
+		}
     }
 
     struct Status {
