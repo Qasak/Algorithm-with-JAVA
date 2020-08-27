@@ -1,11 +1,11 @@
 class Solution {
 public:
     static constexpr int MAX_N = 1000 + 5;
-    static constexpr int MOD = int(1E9) + 7;
+    static constexpr int MOD = 100000000 + 7;
 
     vector<bool> flag=vector<bool>(MAX_N, true);
     vector<int> p=vector<int>(MAX_N);
-    void getPrime() {
+    void get_prime() {
         flag[0] = flag[1] = false;
         for (int i = 2; i < sqrt(MAX_N); ++i) {
             if(flag[i]) {
@@ -23,36 +23,36 @@ public:
     }
 
     struct Status {
-        int f, s; // f 为哈希值 | s 为子树大小
-        Status(int f_ = 0, int s_ = 0) 
-            : f(f_), s(s_) {}
+        int hash_value, tree_size; 
+        Status(int val = 0, int size = 0) 
+            : hash_value(val), tree_size(size) {}
     };
 
-    unordered_map <TreeNode *, Status> hS, hT;
+    unordered_map <TreeNode *, Status> hash_s, hash_t;
 
-    void dfs(TreeNode *o, unordered_map <TreeNode *, Status> &h) {
-        h[o] = Status(o->val, 1);
-        if (!o->left && !o->right) return;
-        if (o->left) {
-            dfs(o->left, h);
-            h[o].s += h[o->left].s;
-            h[o].f = (h[o].f + (31LL * h[o->left].f * p[h[o->left].s]) % MOD) % MOD;
+    void dfs(TreeNode *root, unordered_map <TreeNode *, Status> &h) {
+        h[root] = Status(root->val, 1);
+        if (!root->left && !root->right) return;
+        if (root->left) {
+            dfs(root->left, h);
+            h[root].tree_size += h[root->left].tree_size;
+            h[root].hash_value = (h[root].hash_value + (59LL * h[root->left].hash_value * p[h[root->left].tree_size]) % MOD) % MOD;
         }
-        if (o->right) {
-            dfs(o->right, h);
-            h[o].s += h[o->right].s;
-            h[o].f = (h[o].f + (179LL * h[o->right].f * p[h[o->right].s]) % MOD) % MOD;
+        if (root->right) {
+            dfs(root->right, h);
+            h[root].tree_size += h[root->right].tree_size;
+            h[root].hash_value = (h[root].hash_value + (61LL * h[root->right].hash_value * p[h[root->right].tree_size]) % MOD) % MOD;
         }
     }
 
     bool isSubtree(TreeNode* s, TreeNode* t) {
-        getPrime();
-        dfs(s, hS);
-        dfs(t, hT);
+        get_prime();
+        dfs(s, hash_s);
+        dfs(t, hash_t);
 
-        int tHash = hT[t].f;
-        for (const auto &[k, v]: hS) {
-            if (v.f == tHash) {
+        int hash_value_t = hash_t[t].hash_value;
+        for (const auto &[k, v]: hash_s) {
+            if (v.hash_value == hash_value_t) {
                 return true;
             }
         } 
