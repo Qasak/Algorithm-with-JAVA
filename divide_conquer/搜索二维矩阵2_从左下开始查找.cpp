@@ -15,7 +15,6 @@
 
 class Solution {
 public:
-    vector<int> line_last;
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         if(matrix.empty()) return false;
 
