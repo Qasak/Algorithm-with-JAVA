@@ -45,19 +45,16 @@ private:
         }
         
         while (!q.empty()) {
-			int k=q.size();
-            while(k--) {
-                int from = q.front(); 
-				q.pop();
-                for (int to : graph[from]) {
-					in_degree[to]--;
-                    if (in_degree[to] == 0) {
-                        q.push(to);
-                        ans += (to + 'a');
-                    }
-                    
-                }
-            }
+			int from = q.front(); 
+			q.pop();
+			for (int to : graph[from]) {
+				in_degree[to]--;
+				if (in_degree[to] == 0) {
+					q.push(to);
+					ans += (to + 'a');
+				}
+				
+			}
         }
         
         return ans.size() == cnt ? ans : "";
