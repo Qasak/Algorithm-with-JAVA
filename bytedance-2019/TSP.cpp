@@ -23,7 +23,7 @@ int tsp(vector<vector<int>> &nums){
         }
     }
     int res = MAX;
-    for(int i=1;i<n;i++){
+    for(int i=0;i<n;i++){
         res = min(res,dp[set_mask-1][i] + nums[i][0]);
     }
     return res;
