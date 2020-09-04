@@ -24,9 +24,8 @@ int main() {
                 }
                 cnt=max(cnt, cur[t]);
             }
-
-            pre.clear();
-            pre.swap(cur);
+            pre=cur;
+            cur.clear();
         }
         cout<<cnt<<endl;
     }
