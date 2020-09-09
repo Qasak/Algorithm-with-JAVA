@@ -27,6 +27,6 @@ public:
             fast=fast->next;
             slow=slow->next;
         }
-        return fast;
+        return slow;
     }
 };
