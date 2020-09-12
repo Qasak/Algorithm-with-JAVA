@@ -1,0 +1,48 @@
+SELECT `Name` AS `Customers`
+FROM 
+    Customers
+LEFT JOIN
+    Orders
+ON
+    Customers.Id=Orders.CustomerId
+WHERE
+    Orders.Id IS NULL
+
+SELECT Name AS `Customers`
+FROM 
+    Customers
+LEFT JOIN
+    Orders
+ON
+    Customers.Id=Orders.CustomerId
+WHERE
+    Orders.CustomerId IS NULL
+
+-- 分析
+select a.姓名 as 不近视的学生名单
+from 学生表 as a
+left join 近视学生表 as b
+on a.学号=b.学生学号
+where b.序号 is null;
+
+select a.Name as Customers
+from Customers as a
+left join Orders as b
+on a.Id=b.CustomerId
+where b.CustomerId is null;
+
+
+
+-- 或
+select customers.name as 'Customers'
+from customers
+where customers.id not in
+(
+    select customerid from orders
+);
+
+select a.姓名 as 不近视的学生名单
+from 学生表 as a
+left join 近视学生表 as b
+on a.学号=b.学生学号
+where b.序号 is null;
