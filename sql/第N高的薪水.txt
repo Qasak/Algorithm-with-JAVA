@@ -1,0 +1,41 @@
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  RETURN (
+      # Write your MySQL query statement below.
+      
+  );
+END
+
+
+
+-- LIMIT 5, 5指示MySQL返回从行5开始的5行
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+    SET N := N-1;
+  RETURN (
+      # Write your MySQL query statement below.
+      SELECT 
+            salary
+      FROM 
+            employee
+      GROUP BY 
+            salary
+      ORDER BY 
+            salary DESC
+      LIMIT N, 1
+  );
+END
+
+
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  RETURN (
+      # Write your MySQL query statement below.
+      SELECT 
+          DISTINCT e.salary
+      FROM 
+          employee e
+      WHERE 
+          (SELECT count(DISTINCT salary) FROM employee WHERE salary>e.salary) = N-1
+  );
+END
