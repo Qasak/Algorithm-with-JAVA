@@ -1,0 +1,14 @@
+对于所有座位 id 是奇数的学生，修改其 id 为 id+1，如果最后一个座位 id 也是奇数，则最后一个座位 id 不修改。对于所有座位 id 是偶数的学生，修改其 id 为 id-1。
+
+# Write your MySQL query statement below
+select 
+    (case 
+        when id&1 and id!= (select max(id) from seat) then id+1
+        when !(id&1) then id-1
+        else id end
+    ) as id, student
+    from seat
+order by id;
+
+
+ 

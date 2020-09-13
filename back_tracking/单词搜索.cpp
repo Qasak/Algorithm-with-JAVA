@@ -1,36 +1,34 @@
-
 class Solution {
 private:
-	const vector<pair<int ,int>> a{{0,-1}, {-1, 0}, {0, 1}, {1, 0}};
-	bool used[201][201]={false};
+	int dx[4]={-1,0,1,0};
+    int dy[4]={0,1,0,-1};
+	bool used[201][201];
 	int n;
 	int m;
-    bool dfs(int i, int j, int k, vector<vector<char>>& board, string& word) {
-		if(used[i][j]) return false;
-		if(k==word.size()-1 && board[i][j]==word[k]) return true; 
-		if(board[i][j]==word[k]) {
-			used[i][j]=true;
-			for(auto &p:a) {
-				int ii=i+p.first, jj=j+p.second;
-				if(ii>=0 && ii<n && jj>=0 && jj <m)
-					if(dfs(ii, jj, k+1, board, word)) return true;
+    bool dfs(int x, int y, int k, vector<vector<char>>& board, string& word) {
+		if(used[x][y]) return false;
+		if(k==word.size()-1 && word[k]==board[x][y]) return true; 
+		if(board[x][y]==word[k]) {
+			used[x][y]=true;
+			for(int i=0;i<4;i++) {
+				int xx=x+dx[i], yy=y+dy[i];
+				if(xx>=0 && xx<n && yy>=0 && yy <m)
+					if(dfs(xx, yy, k+1, board, word)) return true;
 			}
 
 		}
-		used[i][j]=false;
+		used[x][y]=false;
 		return false;
 	}
 public:
     bool exist(vector<vector<char>>& board, string word) {
-        int n=board.size();
+        n=board.size();
 		if(!n) return false;
-		int m= board[0].size();
+		m=board[0].size();
 		if(!m) return false;
-		this->n=n;
-		this->m=m;
         for(int i=0; i<n; i++) {
 			for(int j=0; j<m; j++) {
-				if(dfs(i, j, 0, board, word)) return true;
+				if(board[i][j]==word[0] && dfs(i, j, 0, board, word)) return true;
 			}
 		}
         return false;
