@@ -8,31 +8,32 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        ListNode *dummy= new ListNode(0);
-        ListNode *head=dummy;
+        ListNode* head=new ListNode(0);
+        ListNode* p=head;
         while(l1 && l2) {
             if(l1->val<l2->val) {
-                dummy->next=l1;
-                dummy=dummy->next;
+                p->next=l1;
                 l1=l1->next;
+                p=p->next;
             } else {
-                dummy->next=l2;
-                dummy=dummy->next;
+                p->next=l2;
                 l2=l2->next;
+                p=p->next;
             }
         }
         while(l1) {
-            dummy->next=l1;
+            p->next=l1;
             l1=l1->next;
-            dummy=dummy->next;
+            p=p->next;
         }
         while(l2) {
-            dummy->next=l2;
+            p->next=l2;
             l2=l2->next;
-            dummy=dummy->next;
+            p=p->next;
         }
         return head->next;
     }

@@ -8,20 +8,17 @@
  * };
  */
 class Solution {
-private:
-    int val=1<<31;
 public:
-
-    int traverse(TreeNode* node) {
-        if(!node) return 0;
-        int left=max(traverse(node->left),0);
-        int right=max(traverse(node->right),0);
-        int node_price=node->val+left+right;
-        val=max(val, node_price);
-        return node->val+max(left,right);
-    }
+    int ans=INT_MIN;
+    int dfs(TreeNode* root) {
+        if(!root) return 0;
+        int left=max(dfs(root->left), 0);
+        int right=max(dfs(root->right), 0);
+        ans=max(ans,root->val+left+right);
+        return root->val+max(left, right);
+    }   
     int maxPathSum(TreeNode* root) {
-       traverse(root);
-       return val;
+        dfs(root);
+        return ans;
     }
 };
