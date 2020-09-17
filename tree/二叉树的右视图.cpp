@@ -11,24 +11,18 @@
 class Solution {
 public:
     vector<int> ans;
-    int level=0;
-    bool used_level[1024]={false};
-    vector<int> rightSideView(TreeNode* root) {
-        if(root) {
-            if(!used_level[level]) {
-                ans.push_back(root->val);
-                used_level[level]=true;
-            }
-            if(root->right) {
-                ++level;
-                rightSideView(root->right);
-            }
-            if(root->left) {
-                ++level;
-                rightSideView(root->left);
-            }
+    bool used_level[14]={0};
+    void dfs(TreeNode* root, int level) {
+        if(!root) return;
+        if(!used_level[level]) {
+            used_level[level]=true;
+            ans.push_back(root->val);
         }
-        --level;
+        dfs(root->right, level+1);
+        dfs(root->left, level+1);
+    }
+    vector<int> rightSideView(TreeNode* root) {
+        dfs(root, 0);
         return ans;
     }
 };
