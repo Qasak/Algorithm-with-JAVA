@@ -1,13 +1,11 @@
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
-        vector<int> ans;
-        if(nums.empty())
-            return ans;
         int n=nums.size();
+		vector<int> ans(n);
         int prod=1;
         for(int i=0;i<n;i++) {
-			ans.push_back(prod);
+			ans[i]=prod;
             prod*=nums[i];
         }
         prod=1;
