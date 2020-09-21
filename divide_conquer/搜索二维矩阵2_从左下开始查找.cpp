@@ -16,20 +16,19 @@
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        if(matrix.empty()) return false;
-
-        int row=matrix.size()-1;
-        int col=0;
-
-        while(row>=0 && col<matrix[0].size()) {
-            if(matrix[row][col]>target)
-                row--;
-            else if(matrix[row][col]<target) {
-                col++;
-            } else 
+        int n=matrix.size();
+        if(!n) return false;
+        int m=matrix[0].size();
+        int x=n-1;
+        int y=0;
+        while(x>=0 && y<m) {
+            if(matrix[x][y]==target)
                 return true;
+            else if(matrix[x][y]<target)
+                y++;
+            else 
+                x--;
         }
-
         return false;
     }
 };
