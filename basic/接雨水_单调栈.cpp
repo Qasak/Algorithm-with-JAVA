@@ -5,13 +5,12 @@ public:
         int ans=0;
         int n=height.size();
         for(int i=0;i<n;i++) {
-            while(!s.empty() && height[s.top()]<height[i]) {
-                int cur=s.top();
+            while(!s.empty() && height[i]>height[s.top()]) {
+                int h=height[s.top()];
                 s.pop();
-                if(s.empty()) break;
-                int l=s.top();
-                int r=i;
-                ans+=(min(height[l], height[r])-height[cur])*(r-l-1);
+                if(s.empty())
+                    break;
+                ans+=(min(height[s.top()], height[i])-h)*(i-s.top()-1);
             }
             s.push(i);
         }
