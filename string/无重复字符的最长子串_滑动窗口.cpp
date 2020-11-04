@@ -34,7 +34,7 @@ public:
         for(int i = 0; i < s.size(); i++) {
             while (lookup.find(s[i]) != lookup.end()){
                 lookup.erase(s[left]);
-                left ++;
+                left++;
             }
             maxStr = max(maxStr,i-left+1);
             lookup.insert(s[i]);
