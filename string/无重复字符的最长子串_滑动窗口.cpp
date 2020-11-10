@@ -27,11 +27,16 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        if(s.size() == 0) return 0;
+		// 记录不重复字符的集合
         unordered_set<char> lookup;
         int maxStr = 0;
+		// 窗口左边界
         int left = 0;
+		// 窗口向右延申，一旦遇到在集合中出现过的字符，就在集合中删除窗口中最左边的字符，
+		// 直到这个字符不在窗口中
+		// 然后更新最长长度，再将这个字符插入集合
         for(int i = 0; i < s.size(); i++) {
+			
             while (lookup.find(s[i]) != lookup.end()){
                 lookup.erase(s[left]);
                 left++;
