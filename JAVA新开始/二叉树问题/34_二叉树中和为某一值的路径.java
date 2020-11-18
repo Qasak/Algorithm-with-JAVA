@@ -16,7 +16,11 @@ class Solution {
         }
         path.add(root.val);
         cur += root.val;
-		// 一直到叶节点, 所以就不要剪枝了
+		// 用例存在负数，所以不要在这里剪枝
+		// if(cur > sum) {
+		// 	path.remove(path.size() - 1);
+		// 	return;
+		// }
         if(cur == sum && root.left == null && root.right == null) {
 			// 新建一个ArrayList引用 => 否则ans每个位置存的都是path这一个引用
             ans.add(new ArrayList<>(path));

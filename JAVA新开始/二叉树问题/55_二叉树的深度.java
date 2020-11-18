@@ -34,20 +34,29 @@ class Solution {
 }
 // 非递归写法
 // BFS
+
 class Solution {
     public int maxDepth(TreeNode root) {
-        if(root == null) return 0;
-        List<TreeNode> queue = new LinkedList<>() {{ add(root); }}, tmp;
+        if(root == null) {
+            return 0;
+        }
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
         int res = 0;
         while(!queue.isEmpty()) {
-            tmp = new LinkedList<>();
-            for(TreeNode node : queue) {
-                if(node.left != null) tmp.add(node.left);
-                if(node.right != null) tmp.add(node.right);
+            int size = queue.size();
+            for(int i = 0; i < size; i++) {
+                TreeNode tmp = queue.poll();
+                if(tmp.left != null) {
+                    queue.offer(tmp.left);
+                }
+                if(tmp.right != null) {
+                    queue.offer(tmp.right);
+                }
             }
-            queue = tmp;
             res++;
         }
         return res;
     }
 }
+
