@@ -113,7 +113,7 @@ class DNode {
 class LRUCache {
 
     private int capacity;
-    // 哈希表保存key和节点
+    // 哈希表保存key和节点，通过key来定位节点位置
     // 通过哈希表完成O(1)时间内查询key对应的节点
     private final HashMap<Integer, DNode> map;
     private DNode head;
