@@ -131,7 +131,7 @@ public class Q399_Devide {
     }
     // UF
     public double[] calcEquation2(List<List<String>> eqs, double[] vals, List<List<String>> qrs) {
-
+        return null;
     }
     // BFS
     public double[] calcEquation3(List<List<String>> eqs, double[] vals, List<List<String>> qrs) {
@@ -188,8 +188,8 @@ public class Q399_Devide {
                 // b -> a
                 // b -> c
                 for(int k = 0; k < n; k++) {
-                    if(g[node][k] != 0 && !vis[k]) {
-                        System.out.println(node + " " + k);
+                    if(g[node][k] != 0) {
+//                        System.out.println(node + " " + k);
 
                         vis[k] = true;
                         // TODO
@@ -206,7 +206,7 @@ public class Q399_Devide {
     //
     //在本题中，我们可以使用 Floyd 算法，预先计算出任意两点之间的距离。
     public double[] calcEquation4(List<List<String>> eqs, double[] vals, List<List<String>> qrs) {
-
+        return null;
     }
 
 }
