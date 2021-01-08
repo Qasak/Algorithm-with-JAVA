@@ -43,6 +43,7 @@ public class Q74_SearchMatrix {
         // 1 * 2
         while(l <= r) {
             int mid = (l + r) >>> 1;
+            // 注意 都跟列相关
             int v = g[mid / m][mid % m];
             if(v == target) {
                 return true;

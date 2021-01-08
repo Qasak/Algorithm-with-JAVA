@@ -27,10 +27,12 @@ public class CommonSubSequence {
                 } else {
                     // 如果只算长度
 //                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                    // 选择从左边过来的路径
                     if(dp[i - 1][j] < dp[i][j - 1]) {
                         dp[i][j] = dp[i][j - 1];
                         path[i][j]--;
                     } else {
+                        // 选择从上边过来的路径
                         dp[i][j] = dp[i - 1][j];
                         path[i][j]++;
                     }
