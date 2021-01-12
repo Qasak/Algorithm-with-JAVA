@@ -38,17 +38,20 @@ public class Q188_StockIV {
         return dp0[n - 1][k];
     }
 
-    public int maxProfit1(int k, int[] p) {
+    public static int maxProfit1(int k, int[] p) {
         if (p.length == 0) {
             return 0;
         }
 
         int n = p.length;
         k = Math.min(k, n / 2);
+        // 第i天已经进行过k次交易，持有股票的收益
         int[] dp1 = new int[k + 1];
+        // 第i天已经进行过k次交易，不持有股票的收益
         int[] dp0 = new int[k + 1];
-
+        // 天数
         for (int i = 0; i < n; i++) {
+            // 次数
             for (int j = 1; j <= k; j++) {
                 if(i == 0) {
                     dp1[j] = -p[0];
@@ -59,6 +62,7 @@ public class Q188_StockIV {
 
                 dp0[j] = Math.max(dp0[j], dp1[j] + p[i]);
             }
+            System.out.println(Arrays.toString(dp1));
         }
         return dp0[k];
     }
@@ -93,15 +97,31 @@ public class Q188_StockIV {
         return Arrays.stream(dp0[n - 1]).max().getAsInt();
     }
 
+
+    public int maxProfit3(int k, int[] p) {
+        //
+        int n = p.length;
+        if(n == 0) {
+            return 0;
+        }
+        k = Math.min(k, n / 2);
+        int[] buy = new int[k + 1];
+        int[] sell = new int[k + 1];
+        for(int i = 1; i <= k; i++) {
+            buy[i] = -p[0];
+            sell[i] = 0;
+        }
+        for(int i = 1; i < n; i++) {
+            for(int j = 1; j <= k; j++) {
+                // buy[j] : 买入j 次
+                // sell[j] : 卖出j 次
+                buy[j] = Math.max(buy[j], sell[j - 1] - p[i]);
+                sell[j] = Math.max(sell[j], buy[j] + p[i]);
+            }
+        }
+        return sell[k];
+    }
     public static void main(String[] args) {
-        TreeSet<Integer> s = new TreeSet<>();
-        int n = 100;
-        int[] arr = new int[n];
-        for(int i = 0; i < n; i++) {
-            arr[i] =(int) (Math.random() * n);
-        }
-        for(int i = 0; i < n; i++) {
-            System.out.println(arr[(int) (Math.random() * n)]);
-        }
+        System.out.println(maxProfit1(2, new int[]{2,4,1}));
     }
 }

@@ -7,6 +7,9 @@ import java.util.Arrays;
  * @version 1.0
  * @date 2021/1/4 17:22
  */
+
+// 给定一个含有 n 个正整数的数组: 这种数组的性质：前缀和单调递增
+    // 可以用滑动窗口/二分解决
 public class Q209_MinSubArrayLen {
     // 窗口
     public int minSubArrayLen(int s, int[] nums) {
@@ -31,26 +34,24 @@ public class Q209_MinSubArrayLen {
 
         return ans == 0x3f3f3f3f ? 0 : ans;
     }
-    /**
-     *     private static int binarySearch0(int[] a, int fromIndex, int toIndex,
-     *                                      int key) {
-     *         int low = fromIndex;
-     *         int high = toIndex - 1;
-     *
-     *         while (low <= high) {
-     *             int mid = (low + high) >>> 1;
-     *             int midVal = a[mid];
-     *
-     *             if (midVal < key)
-     *                 low = mid + 1;
-     *             else if (midVal > key)
-     *                 high = mid - 1;
-     *             else
-     *                 return mid; // key found
-     *         }
-     *         return -(low + 1);  // key not found.
-     *     }
-     * */
+    // 窗口2
+    public int minSubArrayLen1(int s, int[] nums) {
+        //
+        if(nums == null || nums.length == 0) {
+            return 0;
+        }
+        int n = nums.length;
+        int l = 0, sum = 0;
+        int ans = Integer.MAX_VALUE;
+        for(int r = 0; r < n; r++) {
+            sum += nums[r];
+            while(sum >= s) {
+                ans = Math.min(ans, r - l + 1);
+                sum -= nums[l++];
+            }
+        }
+        return ans == Integer.MAX_VALUE ? 0 : ans;
+    }
     // 二分
     public int minSubArrayLen2(int s, int[] nums) {
         int n = nums.length;

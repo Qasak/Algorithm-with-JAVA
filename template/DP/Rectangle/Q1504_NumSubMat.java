@@ -7,7 +7,8 @@ package leetcode.template.DP.Rectangle;
  */
 public class Q1504_NumSubMat {
     // 1: dp
-    // 结论1：当只有一行1的时候，有多少个1，就能组成多少个矩形
+    // 结论1：每多一个1就加上n
+    //  1: 1; 1,1 : 1 + 2 = 3； 1,1,1: 3+3 = 6, 1,1,1,1: 6+4 = 10
     //
     public int numSubmat(int[][] g) {
         int n = g.length;
@@ -22,12 +23,13 @@ public class Q1504_NumSubMat {
 
             1 + 2 + 1 + (2 + 1) + (3 + 2)
         */
-
+        // O(n^2m)
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < m; j++) {
                 if(g[i][j] == 1) {
                     dp[i][j] = j == 0 ? 1 : 1 + dp[i][j - 1];
                     int d = dp[i][j];
+                    // 单调栈优化点：O(1)找到这一列的最小值
                     for(int k = i; k >= 0; k--) {
                         d = Math.min(d, dp[k][j]);
                         ans += d;
