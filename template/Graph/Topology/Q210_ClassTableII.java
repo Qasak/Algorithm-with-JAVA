@@ -46,4 +46,9 @@ public class Q210_ClassTableII {
         ans[idx--] = u;
         return true;
     }
+
+    public static void main(String[] args) {
+        int[] a = new int[]{1,2,3,4};
+
+    }
 }
