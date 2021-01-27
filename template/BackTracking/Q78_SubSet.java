@@ -8,20 +8,17 @@ import java.util.List;
  * @version 1.0
  * @date 2020/12/29 18:03
  */
+// 2 ^ n 个 子集
 public class Q78_SubSet {
-    // bit子集
+    // 1.bit子集
+    // [[]]
+    // [[],[1]]
+    // [[],[1],[2],[1,2]]
+    // [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
     public List<List<Integer>> subsets(int[] nums) {
         int n = nums.length;
-        // 111 [1,2,3]
-        // 110 [1,2]
-        // 101 [1,3]
-        // 100 [1]
-        // 011 [2,3]
-        // 010 [2]
-        // 001 [3]
-        // 000 []
         List<List<Integer>> ans = new ArrayList<>();
-        // 1 10 11 100 101 110 111
+        ans.add(new ArrayList<Integer>());
         for(int mask = 1; mask < (1 << n); mask++) {
             List<Integer> list = new ArrayList<>();
             for(int i = 0; i < n; i++) {
@@ -31,15 +28,14 @@ public class Q78_SubSet {
             }
             ans.add(list);
         }
-        ans.add(new ArrayList<Integer>());
         return ans;
     }
     // 2.增量构造
+    // [[]]
+    // [[],[1]]
+    // [[],[1],[2],[1,2]]
+    // [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
     public List<List<Integer>> subsets2(int[] nums) {
-        // [[]]
-        // [[],[1]]
-        // [[],[1],[2],[1,2]]
-        // [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
         int n = nums.length;
         List<List<Integer>> ans = new ArrayList<>();
         ans.add(new ArrayList<>());
@@ -54,7 +50,9 @@ public class Q78_SubSet {
         return ans;
     }
     // 回溯
-    //
+    // 1.
+    // [1,2,3]
+    // [1,2,3] [1,2] [1,3] [2,3] [2] [3] []
     List<Integer> t = new ArrayList<Integer>();
     List<List<Integer>> ans = new ArrayList<List<Integer>>();
 
@@ -74,5 +72,26 @@ public class Q78_SubSet {
         t.remove(t.size() - 1);
         // 不选择当前位置
         dfs(cur + 1, nums);
+    }
+    // 2.
+    //
+    // [] [1] [1,2] [1,2,3] [1,3] [2] [2,3] [3]
+    public List<List<Integer>> subsets3(int[] nums) {
+        ans = new ArrayList<>();
+        ans.add(new ArrayList<>());
+        dfs(nums, 0, new ArrayList<>());
+        return ans;
+    }
+    private void dfs(int[] nums, int idx, List<Integer> list) {
+        int n = nums.length;
+        if(idx == n) {
+            return;
+        }
+        for(int i = idx; i < n; i++) {
+            list.add(nums[i]);
+            ans.add(new ArrayList<>(list));
+            dfs(nums, i + 1, list);
+            list.remove(list.size() - 1);
+        }
     }
 }
