@@ -12,13 +12,56 @@
 对于奇数的情况，直接找到最中间的数即可，偶数的话需要求最中间两个数的平均值。
 
 我们分别找第 (m+n+1) / 2 个，和 (m+n+2) / 2 个，然后求其平均值即可，这对奇偶数均适用
+相当于两个相同的数字相加再除以2，还是其本身。
 // eg: m+n = 5, (m+n+1) / 2 = 3, (m+n+2) / 2 = 3
 // eg: m+n = 6, (m+n+1) / 2 = 3, (m+n+2) / 2 = 4
 加入 m+n 为奇数的话，那么其实 (m+n+1) / 2 和 (m+n+2) / 2 的值相等
-相当于两个相同的数字相加再除以2，还是其本身。
+
 
 
 **/
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int[] nums;
+        int m = nums1.length;
+        int n = nums2.length;
+        nums = new int[m + n];
+        if (m == 0) {
+            if (n % 2 == 0) {
+                return (nums2[n / 2 - 1] + nums2[n / 2]) / 2.0;
+            } else {
+
+                return nums2[n / 2];
+            }
+        }
+        if (n == 0) {
+            if (m % 2 == 0) {
+                return (nums1[m / 2 - 1] + nums1[m / 2]) / 2.0;
+            } else {
+                return nums1[m / 2];
+            }
+        }
+
+        int count = 0;
+        int i = 0, j = 0;
+		// 合并两个有序数组
+        while(i < m && j < n) {
+            nums[count++] = nums1[i] < nums2[j] ? nums1[i++] : nums2[j++];
+        }
+        while(i < m) {
+            nums[count++] = nums1[i++];
+        }
+        while(j < n) {
+            nums[count++] = nums2[j++];
+        }
+        if (count % 2 == 0) {
+            return (nums[count / 2 - 1] + nums[count / 2]) / 2.0;
+        } else {
+            return nums[count / 2];
+        }
+    }
+}
+
 class Solution {
   public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int m = nums1.length;
