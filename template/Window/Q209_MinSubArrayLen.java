@@ -28,4 +28,23 @@ public class Q209_MinSubArrayLen {
 
         return ans == 0x3f3f3f3f ? 0 : ans;
     }
+    // 二刷
+    public int minSubArrayLen1(int s, int[] nums) {
+        if(nums == null || nums.length == 0) {
+            return 0;
+        }
+        int n = nums.length;
+        int cur = 0;
+        int l = 0;
+        int ans = n + 1;
+        for(int r = 0 ; r < n; r++) {
+            cur += nums[r];
+            while(l <= r && cur >= s) {
+                ans = Math.min(ans, r - l + 1);
+                cur -= nums[l];
+                l++;
+            }
+        }
+        return ans == n + 1 ? 0 : ans;
+    }
 }
