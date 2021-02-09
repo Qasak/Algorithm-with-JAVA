@@ -1,6 +1,6 @@
 package leetcode.template.DP.Array;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * @author Wangjs
@@ -107,5 +107,11 @@ public class Q376_WiggleArr {
             }
         }
         return Math.max(up, down);
+    }
+
+    public static void main(String[] args) {
+        int [] nums = new int[]{11,2};
+        List<Integer> list = new ArrayList<>();
+
     }
 }
