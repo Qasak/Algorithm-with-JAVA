@@ -38,4 +38,9 @@ public class Q778_swimInWater {
         }
         return dist[n * n - 1];
     }
+
+    public static void main(String[] args) {
+
+        Arrays.asList();
+    }
 }
