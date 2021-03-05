@@ -47,4 +47,23 @@ public class Q424_CharacterReplaceRepeat {
         }
         return res;
     }
+    // 重复字母 -> 统计区间内的众数
+    // 替换 k 次 -> 不够替换时缩小区间
+    public int characterReplacement2(String s, int k) {
+        char[] cs = s.toCharArray();
+        int n = cs.length;
+        int l = 0, ans = 0;
+        int[] cnt = new int[26];
+        int m = 0;
+        for(int r = 0; r < n; r++) {
+            cnt[cs[r] - 'A']++;
+            m = Math.max(m, cnt[cs[r] - 'A']);
+            if(r - l + 1 - m > k) {
+                cnt[cs[l] - 'A']--;
+                l++;
+            }
+            ans = Math.max(ans, r - l + 1);
+        }
+        return ans;
+    }
 }

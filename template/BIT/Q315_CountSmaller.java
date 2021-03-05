@@ -134,8 +134,9 @@ public class Q315_CountSmaller {
     // 编号：        1,2,3,4
     //
 
-    //c:数状数组：c[i - 1] : 有多少个数比 i小
+    // c: 数状数组：c[i - 1] : 有多少个数比 i小
     private int[] c;
+    // a: 原始数组
     private int[] a;
 
     public List<Integer> countSmaller3(int[] nums) {
@@ -244,26 +245,7 @@ public class Q315_CountSmaller {
     // 绑定下标
     public static void main(String[] args) {
         int[] a = new int[]{1,3,2,3,1};
-        //idx:              0,1,2,3,4
-        // arr[0] = 5
-        // arr[1] = 3
-        //
-//        idx = new int[a.length];
-//        for(int i = 0; i < a.length; i++) {
-//            idx[i] = i;
-//        }
-//        bubbleSort(a);
-//        System.out.println(Arrays.toString(idx));
-//        List<Integer> list = new ArrayList<>();
-//        list.add(0, 0);
-//        list.add(1, 1);
-//        System.out.println(list);
-//        System.out.println(countSmaller(a));
-//        System.out.println(lowbit(5));
-        String c = "c";
-        String b = "b";
-        System.out.println(c + b);
-        String[] s = c.split("c");
-        System.out.println(s[0]);
+        int b = Arrays.stream(a).max().getAsInt();
+        System.out.println(b);
     }
 }

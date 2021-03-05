@@ -50,4 +50,44 @@ public class Q25_ReverseKGroup {
         l.next = reverseKGroup(r, k);
         return pre;
     }
+
+
+
+    public ListNode reverseKGroup1(ListNode head, int k) {
+        if(head == null) {
+            return null;
+        }
+        ListNode d = new ListNode(-1);
+        d.next = head;
+        ListNode tmp = d.next;
+
+        ListNode kHead = tmp;
+        ListNode kEnd = tmp;
+        for(int i = 0; i < k - 1; i++) {
+            if(kEnd.next == null) {
+                return head;
+            }
+            kEnd = kEnd.next;
+        }
+        ListNode t = kEnd.next;
+        if(kEnd != null) {
+            kEnd.next = null;
+        }
+        d.next = reverse(kHead);
+        kHead.next = reverseKGroup1(t, k);
+        return d.next;
+    }
+    public ListNode reverse(ListNode head) {
+        if(head == null) {
+            return head;
+        }
+        ListNode pre = null, cur = head, next = head;
+        while(cur != null) {
+            next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
 }
