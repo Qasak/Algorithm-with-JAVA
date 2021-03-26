@@ -2,6 +2,7 @@ package leetcode.template.BIT;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * @author Wangjs
@@ -43,5 +44,12 @@ public class Q315_BIT {
             c[x] += 1;
             x += x & -x;
         }
+    }
+
+    public static void main(String[] args) {
+        PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> a[0] == b[0] ? a[1] - b[1] : b[0] - a[0]);
+        PriorityQueue<int[]> buy = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+        PriorityQueue<int[]> sell = new PriorityQueue<>();
+
     }
 }

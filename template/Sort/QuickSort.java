@@ -27,9 +27,11 @@ public class QuickSort {
         swap(nums, r, l + x);
         return partition(nums, l, r);
     }
+
     public int partition(int[] nums, int l, int r) {
+        // 小的全部扔过去，剩下的就是大的
         int i = l - 1;
-        for(int j = i + 1; j < r; j++) {
+        for(int j = l; j < r; j++) {
             if(nums[j] < nums[r]) {
                 swap(nums, ++i, j);
             }
@@ -37,6 +39,23 @@ public class QuickSort {
         swap(nums, ++i, r);
         return i;
     }
+
+    public int split(int[] nums, int l, int r) {
+        // 小的全部扔过去，剩下的就是大的
+        int i = l;
+        for(int j = l; j < r; j++) {
+            if(nums[j] < nums[r]) {
+                swap(nums, i++, j);
+            }
+        }
+        if(nums[i] < nums[r]) {
+            swap(nums, ++i, r);
+        } else {
+            swap(nums, i, r);
+        }
+        return i;
+    }
+
     public int[] sortArray(int[] nums) {
         rand = new Random();
         quickSort(nums, 0, nums.length - 1);
