@@ -6,54 +6,47 @@ package leetcode.template.String;
  * @date 2020/12/22 19:02
  */
 public class KMP {
-    // m 在 s 中是否存在，存在则返回下标
-    public static int getIndexOf(String s, String m) {
-        if (s == null || m == null || m.length() < 1 || s.length() < m.length()) {
+    // t 在 s 中是否存在，存在则返回下标
+    // KMP算法
+    public int strStr(String s, String t) {
+        if(s == null || t == null || s.length() < t.length()) {
             return -1;
         }
-        char[] ss = s.toCharArray();
-        char[] ms = m.toCharArray();
-        int si = 0;
-        int mi = 0;
-        int[] next = getNextArray(ms);
-        while (si < ss.length && mi < ms.length) {
-            if (ss[si] == ms[mi]) {
-                si++;
-                mi++;
-            } else if (next[mi] == -1) {
-                si++;
+        if(t.length() == 0) {
+            return 0;
+        }
+        char[] cs = s.toCharArray();
+        char[] ct = t.toCharArray();
+        int[] next = getNext(ct);
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+        while(i < n && j < m) {
+            if(j == -1 || cs[i] == ct[j]) {
+                i++;
+                j++;
             } else {
-                mi = next[mi];
+                j = next[j];
             }
         }
-        return mi == ms.length ? si - mi : -1;
+        return j == m ? i - j : -1;
     }
-
-    public static int[] getNextArray(char[] ms) {
-        if (ms.length == 1) {
-            return new int[] { -1 };
-        }
-        int[] next = new int[ms.length];
+    private int[] getNext(char[] ct) {
+        int n = ct.length;
+        int[] next = new int[n];
         next[0] = -1;
-        next[1] = 0;
-        int pos = 2;
-        int cn = 0;
-        while (pos < next.length) {
-            if (ms[pos - 1] == ms[cn]) {
-                next[pos++] = ++cn;
-            } else if (cn > 0) {
-                cn = next[cn];
+        int i = 0, j = -1;
+        while(i < n - 1) {
+            if(j == -1 || ct[i] == ct[j]) {
+                next[++i] = ++j;
             } else {
-                next[pos++] = 0;
+                j = next[j];
             }
         }
         return next;
     }
 
     public static void main(String[] args) {
-        String str = "abcabcababaccc";
-        String match = "ababc";
-        System.out.println(getIndexOf(str, match));
+
 
     }
 }
