@@ -3,6 +3,7 @@ package Others;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.security.InvalidAlgorithmParameterException;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -14,28 +15,28 @@ import java.util.concurrent.ThreadLocalRandom;
 public class RedPackage {
     private int remainSize;
     private BigDecimal  remainMoney;
+    private BigDecimal min = new BigDecimal("0.01");
+
+
+
     public RedPackage(int size, BigDecimal money) {
         remainSize = size;
-        remainMoney = money;
+        remainMoney = money.subtract(new BigDecimal(size).multiply(new BigDecimal("0.01")));
     }
     // 二倍均值法：每次抢的金额 = [0.01, 2 * (money / size))
     public BigDecimal getRandomMoney() {
         if(remainSize == 1) {
             remainSize--;
-            return remainMoney;
+            return remainMoney.add(min);
         }
         Random rand = new Random();
-        BigDecimal min = new BigDecimal("0.01");
-        BigDecimal max = remainMoney.multiply(new BigDecimal(2)).divide(new BigDecimal(remainSize), 2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal max = remainMoney.divide(new BigDecimal(remainSize), 2, BigDecimal.ROUND_HALF_UP);
+        max = max.multiply(new BigDecimal(2));
         BigDecimal ret = max.multiply(new BigDecimal(String.valueOf(rand.nextDouble())));
-        if(ret.compareTo(min) < 0) {
-            ret = min;
-        }
-        BigDecimal t = ret.setScale(2, BigDecimal.ROUND_CEILING);
-        System.out.println(ret + " "  + t);
-        ret = t;
+
+        ret = ret.setScale(2, BigDecimal.ROUND_CEILING);
         remainSize--;
         remainMoney = remainMoney.subtract(ret);
-        return ret;
+        return ret.add(min);
     }
 }
