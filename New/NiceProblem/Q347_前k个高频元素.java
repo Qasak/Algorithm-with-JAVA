@@ -46,17 +46,17 @@ public class Q347_前k个高频元素 {
         if(l >= r) {
             return;
         }
-        int p = partition(tmp, l, r);
-        if(p <= k) {
-            cnt++;
+        int[] p = partition(tmp, l, r);
+        if(p[0] <= k) {
+            cnt += p[1] - p[0] + 1;
         }
         if(cnt == k + 1) {
             return;
         }
-        quickSelect(tmp, l, p - 1, k);
-        quickSelect(tmp, p + 1, r, k);
+        quickSelect(tmp, l, p[0] - 1, k);
+        quickSelect(tmp, p[1] + 1, r, k);
     }
-    public int partition(int[][] tmp, int l, int r) {
+    public int[] partition(int[][] tmp, int l, int r) {
         swap(tmp, rand.nextInt(r - l + 1) + l, r);
         int i = l - 1;
         int k = r;
@@ -71,7 +71,7 @@ public class Q347_前k个高频元素 {
             }
         }
         swap(tmp, j, r);
-        return j;
+        return new int[]{i + 1, j};
     }
     public void swap(int[][] tmp, int i, int j) {
         int tfreq = tmp[i][0];
