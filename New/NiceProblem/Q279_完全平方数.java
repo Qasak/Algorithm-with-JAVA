@@ -9,25 +9,19 @@ import java.util.Arrays;
  */
 public class Q279_完全平方数 {
     public int numSquares(int n) {
-        // 完全平方数最少为1个，1个时为最大
-        int m = (int) Math.sqrt(n);
-        int[] tmp = new int[m + 1];
-        for(int i = 1; i <= m; i++) {
-            tmp[i] = i * i;
+        int max = (int) Math.sqrt(n) + 1;
+        int[] nums = new int[max];
+        for(int i = 0; i < max; i++) {
+            nums[i] = (i + 1) * (i + 1);
         }
-
-        // 完全背包
-        // f[i] : 和为正整数i时 最少的完全平方数个数
         int[] f = new int[n + 1];
-        Arrays.fill(f, Integer.MAX_VALUE);
+        Arrays.fill(f, 0x3f3f3f3f);
         f[0] = 0;
-        for(int i = 1; i <= n; i++) {
-            // 扫每一个可用平方数取最小
-            for(int j = 1; j <= m; j++) {
-                if(i < tmp[j]) {
-                    break;
+        for(int i = 0; i < max; i++) {
+            for(int j = 1; j <= n; j++) {
+                if(j >= nums[i]) {
+                    f[j] = Math.min(f[j], f[j - nums[i]] + 1);
                 }
-                f[i] = Math.min(f[i], f[i - tmp[j]] + 1);
             }
         }
         return f[n];
