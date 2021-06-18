@@ -39,4 +39,32 @@ public class Q483_最小好进制 {
         }
         return res;
     }
+
+
+    // 二项式定理 不等式 枚举
+    public String smallestGoodBase1(String m) {
+        // (11...11)k = k^{s} + k^{s-1} + ... + k^1 + k^0 = n
+        // k^s < n < (k+1)^s
+        // k < n^{1/s} < k+1
+        long n = Long.parseLong(m);
+        long ans = n - 1;   // 将答案置为 s=1 的情况
+        for (int s = 59; s >= 2; --s) {
+            int k = (int)Math.pow(n, 1.0 / s);   // k 为 n^{1/s} 的整数部分
+            // System.out.println(k);
+            if (k > 1) {    // 判断 k 是否是一个合法的进制
+                long sum = 1;
+                for (int i = 0; i < s; ++i) {
+                    sum = sum * k + 1;
+                }
+                if (sum == n) {
+                    ans = k;
+                    break;
+                }
+            }
+        }
+        return String.valueOf(ans);
+    }
+    public static void main(String[] args) {
+        System.out.println((1.0 / 3));
+    }
 }
