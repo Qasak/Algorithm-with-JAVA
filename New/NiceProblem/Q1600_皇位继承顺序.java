@@ -8,6 +8,7 @@ import java.util.*;
  * @date 2021/6/20 21:49
  */
 public class Q1600_皇位继承顺序 {
+    // (嫡长子继承制)
     String king;
     Map<String, List<String>> map = new HashMap<>();
     Set<String> set = new HashSet<>();
