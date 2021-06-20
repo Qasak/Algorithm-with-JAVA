@@ -52,6 +52,7 @@ public class Q483_最小好进制 {
             int k = (int)Math.pow(n, 1.0 / s);   // k 为 n^{1/s} 的整数部分
             // System.out.println(k);
             if (k > 1) {    // 判断 k 是否是一个合法的进制
+                // 秦九韶算法
                 long sum = 1;
                 for (int i = 0; i < s; ++i) {
                     sum = sum * k + 1;
