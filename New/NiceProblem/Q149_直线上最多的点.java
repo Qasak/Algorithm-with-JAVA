@@ -44,17 +44,9 @@ public class Q149_直线上最多的点 {
     public int maxPoints1(int[][] points) {
         int ans = 1;
         int n = points.length;
-        // y = kx + b
-        // y1 = kx1 + b;
-        // y2 = kx2 + b;
-        // y3 = kx3 + b;
-        // y1 - y2 = k(x1 - x2)
-        // k = (y1 - y2) / (x1 - x2)
-        // k' = (y1 - y3) / (x1 - x3)
-        // (y1 - y2) * (x1 - x3) == (y1 - y3) * (x1 - x2)
-
         for(int i = 0; i < n; i++) {
             int[] a = points[i];
+             // 由当前点 i 发出的直线所经过的最多点数量
             Map<Double, Integer> map = new HashMap<>();
             for(int j = i + 1; j < n; j++) {
                 int[] b = points[j];
@@ -77,5 +69,33 @@ public class Q149_直线上最多的点 {
             }
         }
         return ans;
+    }
+
+    // 避免精度问题
+    public int maxPoints2(int[][] ps) {
+        int n = ps.length;
+        int ans = 1;
+        for (int i = 0; i < n; i++) {
+            Map<String, Integer> map = new HashMap<>();
+            // 由当前点 i 发出的直线所经过的最多点数量
+            int max = 0;
+            for (int j = i + 1; j < n; j++) {
+                int x1 = ps[i][0], y1 = ps[i][1], x2 = ps[j][0], y2 = ps[j][1];
+                int a = x1 - x2, b = y1 - y2;
+                int k = gcd(a, b);
+                String key = (a / k) + "_" + (b / k);
+                map.put(key, map.getOrDefault(key, 0) + 1);
+                max = Math.max(max, map.get(key));
+            }
+            ans = Math.max(ans, max + 1);
+        }
+        return ans;
+    }
+    int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+
+    public static void main(String[] args) {
+        System.out.println((1.0 / 3.0));
     }
 }
