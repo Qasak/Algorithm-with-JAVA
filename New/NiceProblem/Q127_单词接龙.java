@@ -1,5 +1,7 @@
 package leetcode.contest.NiceProblem;
 
+import java.util.*;
+
 /**
  * @author Wangjs
  * @version 1.0
