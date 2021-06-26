@@ -7,10 +7,16 @@ import java.util.*;
  * @version 1.0
  * @date 2021/6/26 11:55
  */
+// 这是八数码问题的简化版：将 3 * 3变为 2 * 3，同时将「输出路径」变为「求最小步数」。
+//
+//通常此类问题可以使用「BFS」、「AStar 算法」、「康拓展开」进行求解。
+//
+//由于问题简化到了 2∗3，我们使用前两种解法即可。
 public class Q773_滑动谜题 {
     public int slidingPuzzle(int[][] board) {
         int[][] target = new int[][]{{1,2,3},
                 {4,5,0}};
+        int[][] dir = new int[][]{{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
         Deque<int[][]> q = new LinkedList<>();
         Set<String> set = new HashSet<>();
         int step = 0;
@@ -25,56 +31,20 @@ public class Q773_滑动谜题 {
                 int[][] tmp = q.poll();
                 int[] t = findZero(tmp);
                 int x = t[0], y = t[1];
-                if(x > 0) {
-                    swap(tmp, x, y, x - 1, y);
-                    int[][] cur = copy(tmp);
-                    if(Arrays.deepEquals(cur, target)) {
-                        return step + 1;
+                for(int[] d : dir) {
+                    int xx = x + d[0], yy = y + d[1];
+                    if(xx >= 0 && xx < 2 && yy >= 0 && yy < 3) {
+                        swap(tmp, x, y, xx, yy);
+                        int[][] cur = copy(tmp);
+                        if(Arrays.deepEquals(cur, target)) {
+                            return step + 1;
+                        }
+                        if(!set.contains(boardToString(cur))) {
+                            q.offer(cur);
+                            set.add(boardToString(cur));
+                        }
+                        swap(tmp, x, y, xx, yy);
                     }
-                    if(!set.contains(boardToString(cur))) {
-                        q.offer(cur);
-                        set.add(boardToString(cur));
-                    }
-                    swap(tmp, x, y, x - 1, y);
-                }
-                if(x < 1) {
-                    swap(tmp, x, y, x + 1, y);
-                    int[][] cur = copy(tmp);
-
-
-                    if(Arrays.deepEquals(cur, target)) {
-                        return step + 1;
-                    }
-                    if(!set.contains(boardToString(cur))) {
-                        q.offer(cur);
-                        set.add(boardToString(cur));
-                    }
-                    swap(tmp, x, y, x + 1, y);
-                }
-                if(y < 2) {
-                    swap(tmp, x, y, x, y + 1);
-                    int[][] cur = copy(tmp);
-
-                    if(Arrays.deepEquals(cur, target)) {
-                        return step + 1;
-                    }
-                    if(!set.contains(boardToString(cur))) {
-                        q.offer(cur);
-                        set.add(boardToString(cur));
-                    }
-                    swap(tmp, x, y, x, y + 1);
-                }
-                if(y > 0) {
-                    swap(tmp, x, y, x, y - 1);
-                    int[][] cur = copy(tmp);
-                    if(Arrays.deepEquals(cur, target)) {
-                        return step + 1;
-                    }
-                    if(!set.contains(boardToString(cur))) {
-                        q.offer(cur);
-                        set.add(boardToString(cur));
-                    }
-                    swap(tmp, x, y, x, y - 1);
                 }
             }
             step++;
