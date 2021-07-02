@@ -10,17 +10,18 @@ public class Q1898_可移除字符的最大数目 {
     public int maximumRemovals(String s, String p, int[] removable) {
         int k = 0;
         int n = removable.length;
-        int l = 0, r = n + 1;
+        int l = 0, r = n;
         while(l < r) {
             int m = (l + r) >>> 1;
-            if(check(s, p, m, removable)) {
+            if(check(s, p, m + 1, removable)) {
                 l = m + 1;
             } else {
                 r = m;
             }
         }
-        return l - 1;
+        return l;
     }
+    // 使用标记来表示删除
     public boolean check(String s, String t, int k, int[] removable) {
         int n = s.length();
         int m = t.length();
