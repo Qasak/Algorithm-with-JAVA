@@ -57,4 +57,8 @@ public class Q480_滑动窗口中位数 {
             tmp[i] = list.get(i);
         }
     }
+
+    // 延迟删除
+    // 我们保证在任意操作 insert(num)，erase(num)，getMedian() 完成之后（或者说任意操作开始之前），small 和 large 的堆顶元素都是不需要被「延迟删除」的
+
 }
