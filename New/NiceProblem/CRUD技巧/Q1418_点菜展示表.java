@@ -10,7 +10,7 @@ import java.util.*;
 public class Q1418_点菜展示表 {
     public List<List<String>> displayTable(List<List<String>> orders) {
         List<List<String>> ans = new ArrayList<>();
-        // "Beef Burrito" : id: num
+        // "food" : {id: num}
         TreeMap<String, Map<Integer, Integer>> map = new TreeMap<>();
         TreeSet<Integer> ids = new TreeSet<>();
         for(List<String> order : orders) {
