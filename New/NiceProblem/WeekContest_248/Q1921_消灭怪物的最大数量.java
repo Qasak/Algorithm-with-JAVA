@@ -8,6 +8,7 @@ import java.util.Arrays;
  * @date 2021/7/7 9:09
  */
 public class Q1921_消灭怪物的最大数量 {
+    // 贪心
     public int eliminateMaximum(int[] dist, int[] speed) {
         int n = dist.length;
         int[] tmp = new int[n];
