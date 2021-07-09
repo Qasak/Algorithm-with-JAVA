@@ -18,24 +18,20 @@ public class Q229_求众数2 {
         for(int i : nums) {
             if(i == a) {
                 cnt1++;
-                continue;
             }
-            if(i == b) {
+            else if(i == b) {
                 cnt2++;
-                continue;
             }
-            if(cnt1 == 0) {
+            else if(cnt1 == 0) {
                 a = i;
                 cnt1++;
-                continue;
             }
-            if(cnt2 == 0) {
+            else if(cnt2 == 0) {
                 b = i;
                 cnt2++;
-                continue;
+            } else {
+                cnt1--; cnt2--;
             }
-
-            cnt1--; cnt2--;
         }
         // System.out.println(a + " " + b);
         List<Integer> ans = new ArrayList<>();
