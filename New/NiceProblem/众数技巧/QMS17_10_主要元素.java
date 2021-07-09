@@ -9,18 +9,17 @@ public class QMS17_10_主要元素 {
     // 投票算法
     public int majorityElement(int[] nums) {
         int n = nums.length;
-        int major = nums[0];
-        int cnt = 1;
+        int major = -1;
+        int cnt = 0;
         // 是否存在众数
         for(int i : nums) {
+            if(cnt == 0) {
+                major = i;
+            }
             if(i == major) {
                 cnt++;
             } else {
                 cnt--;
-            }
-            if(cnt == 0) {
-                major = i;
-                cnt = 1;
             }
         }
         // 由于不一定存在主要元素，因此需要第二次遍历数组，验证 major 是否为主要元素
