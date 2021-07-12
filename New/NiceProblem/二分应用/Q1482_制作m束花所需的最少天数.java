@@ -8,6 +8,13 @@ import java.util.Arrays;
  * @date 2021/7/12 9:21
  */
 public class Q1482_制作m束花所需的最少天数 {
+// 这个制作花束的人是个笨比，只会拿连续的花。
+// 因此可以用贪心的方法来拿花，并且遵顼以下的策略：
+// 每次遍历花园中的花：
+
+    // 遇到开花的花，就拿在手上
+// 遇到没开的花，就把手上的花全部扔掉
+// 手上的花足够制作花束，就制作花束，制作完后放到一旁（此时手上没花了）
     public int minDays(int[] bloomDay, int m, int k) {
         int cnt = m * k;
         int n = bloomDay.length;
@@ -32,14 +39,14 @@ public class Q1482_制作m束花所需的最少天数 {
     private boolean check(int d, int[] bloomDay, int n, int m, int k) {
         int cnt = 0;
         int flower = 0;
-        for(int i = 0; i < n; i++) {
-            if(bloomDay[i] <= d) {
+        for(int day : bloomDay) {
+            if(day <= d) {
                 flower++;
-                if(flower == k) {
-                    cnt++;
-                    flower = 0;
-                }
             } else {
+                flower = 0;
+            }
+            if(flower == k) {
+                cnt++;
                 flower = 0;
             }
         }
