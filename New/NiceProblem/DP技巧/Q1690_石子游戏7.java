@@ -29,4 +29,29 @@ public class Q1690_石子游戏7 {
         return f[l][r] = Math.max(pre[r + 1] - pre[l + 1] - dfs(l + 1, r, f, pre),
                 pre[r] - pre[l] - dfs(l, r - 1, f, pre));
     }
+    // dp 1
+    public int stoneGameVII1(int[] stones) {
+        int n = stones.length;
+        int[][] f = new int[n][n];
+        int[] pre = new int[n + 1];
+        for(int i = 0; i < n; i++) {
+            pre[i + 1] = pre[i] + stones[i];
+        }
+        for(int i = n - 1; i >= 0; i--) {
+            for(int j = i + 1; j < n; j++) {
+                f[i][j] = Math.max(pre[j + 1] - pre[i + 1] - f[i + 1][j],
+                        pre[j] - pre[i] - f[i][j - 1]);
+            }
+        }
+        // dp 2
+//        for(int len = 2; len <= n; len++) {
+//            for(int i = 0; i + len - 1 < n; i++) {
+//                int j = i + len - 1;
+//                f[i][j] = Math.max(pre[j + 1] - pre[i + 1] - f[i + 1][j],
+//                        pre[j] - pre[i] - f[i][j - 1]);
+//            }
+//        }
+
+        return f[0][n - 1];
+    }
 }
