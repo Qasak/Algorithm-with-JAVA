@@ -2,6 +2,8 @@ package leetcode.contest.NiceProblem.数据结构API技巧;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.TreeMap;
 
 /**
  * @author Wangjs
