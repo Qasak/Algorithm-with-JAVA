@@ -178,4 +178,22 @@ public class Q1818_绝对差值和 {
         }
         return l;
     }
+    // 用int也可以
+//    int ans = 0;
+//    int max = 0;
+//        for(int i = 0; i < n; i++) {
+//        int a = nums1[i], b = nums2[i];
+//        int abs = Math.abs(a - b);
+//        ans += abs;
+//        if(ans >= mod) {
+//            ans -= mod;
+//        }
+//        int j = ceiling(tmp, b);
+//        int t = abs - Math.abs(tmp[j] - b);
+//        if(j > 0) {
+//            t = Math.max(t, abs - Math.abs(tmp[j - 1] - b));
+//        }
+//        max = Math.max(max, t);
+//    }
+//        return ((ans - max + mod) % mod);
 }
