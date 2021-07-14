@@ -73,6 +73,49 @@ public class Q1712_将数组分成三个子数组的方案数 {
         return res;
     }
 
+
+    // remaster
+    public int waysToSplit1(int[] nums) {
+        int n = nums.length;
+        int mod = (int)(1e9 + 7);
+        int[] pre = new int[n + 1];
+        for(int i = 0; i < n; i++) {
+            pre[i + 1] = pre[i] + nums[i];
+        }
+        int ans = 0;
+        //  0 ~ i|i + 1 ~ b | b + 1 ~ n - 1
+        for(int i = 0; pre[i + 1] <= pre[n] / 3 && i <= n - 3; i++) {
+            // mid的左边界 / mid的右边界 [a, b]
+            int l = i + 1, r = n - 2;
+            // ceiling
+            while(l < r) {
+                int m = (l + r) >>> 1;
+                if(pre[m + 1] - pre[i + 1] < pre[i + 1]) {
+                    l = m + 1;
+                } else {
+                    r = m;
+                }
+            }
+            int a = l;
+            l = i + 1;
+            r = n - 2;
+            // floor
+            while(l < r) {
+                int m = (l + r + 1) >>> 1;
+                if(pre[m + 1] - pre[i + 1] > pre[n] - pre[m + 1]) {
+                    r = m - 1;
+                } else {
+                    l = m;
+                }
+            }
+            int b = l;
+            if(pre[i + 1] <= pre[a + 1] - pre[i + 1] &&
+                    pre[n] - pre[b + 1] >= pre[b + 1] - pre[a]) {
+                ans = (ans + b - a + 1) % mod;
+            }
+        }
+        return (ans % mod);
+    }
     public static void main(String[] args) {
         TreeSet<Integer> set = new TreeSet<>();
         set.add(1);
