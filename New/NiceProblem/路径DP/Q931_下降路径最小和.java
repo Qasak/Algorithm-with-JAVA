@@ -32,12 +32,14 @@ public class Q931_下降路径最小和 {
     public int minFallingPathSum1(int[][] matrix) {
         int n = matrix.length;
         int[] f = new int[n];
-        Arrays.fill(f, 0x3f3f3f3f);
+        int[] g = new int[n];
         for(int i = 0; i < n; i++) {
             f[i] = matrix[0][i];
         }
         for(int i = 1; i < n ;i ++) {
-            int[] g = f.clone();
+            for(int j = 0; j < n; j++) {
+                g[j] = f[j];
+            }
             Arrays.fill(f, 0x3f3f3f3f);
             for(int j = n - 1; j >= 0; j--) {
                 f[j] = Math.min(f[j], g[j] + matrix[i][j]);
