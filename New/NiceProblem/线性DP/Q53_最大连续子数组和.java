@@ -18,4 +18,17 @@ public class Q53_最大连续子数组和 {
         }
         return ans;
     }
+
+    // 前缀和
+    public int maxSubArray1(int[] nums) {
+        int min = 0;
+        int ans = Integer.MIN_VALUE;
+        int pre = 0;
+        for(int i = 0 ; i < nums.length ; i ++){
+            pre += nums[i];
+            ans = Math.max(ans, pre - min);
+            min = Math.min(min, pre);
+        }
+        return ans;
+    }
 }
