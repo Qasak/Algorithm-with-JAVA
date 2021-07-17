@@ -21,9 +21,13 @@ public class Q53_最大连续子数组和 {
 
     // 前缀和
     public int maxSubArray1(int[] nums) {
+        // 最小前缀和
         int min = 0;
         int ans = Integer.MIN_VALUE;
+        // 当前前缀和
         int pre = 0;
+        // 对于每一个当前前缀和，都存在一个最小前缀和与之对应
+        // 其差值即当前最大连续子数组的和
         for(int i = 0 ; i < nums.length ; i ++){
             pre += nums[i];
             ans = Math.max(ans, pre - min);
