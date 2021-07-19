@@ -12,7 +12,7 @@ public class Q1705_吃苹果的最大数目 {
         PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> (a[1] - b[1]));
         int n = apples.length;
         int ans = 0;
-        for(int i = 0; i < 40001; i++) {
+        for(int i = 0; i < n || !pq.isEmpty(); i++) {
             if(i < n) {
                 int[] tt = new int[2];
                 // 个数:过期时间
@@ -21,7 +21,6 @@ public class Q1705_吃苹果的最大数目 {
                     pq.offer(tt);
                 }
             }
-
             // 吃一个最早过期的
             while(!pq.isEmpty()) {
                 int[] t = pq.poll();
@@ -34,9 +33,6 @@ public class Q1705_吃苹果的最大数目 {
                     ans++;
                     break;
                 }
-            }
-            if(i >= n && pq.isEmpty()) {
-                break;
             }
         }
         return ans;
