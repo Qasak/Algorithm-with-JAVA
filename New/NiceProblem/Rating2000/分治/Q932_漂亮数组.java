@@ -1,4 +1,4 @@
-package leetcode.contest.Rating2000;
+package leetcode.contest.Rating2000.分治;
 
 /**
  * @author Wangjs
