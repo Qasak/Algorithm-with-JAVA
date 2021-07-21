@@ -19,14 +19,18 @@ public class Q795_区间子数组个数 {
             pre = 0;
         }
         for(int i = 1; i < n; i++) {
+            // 不能满足条件，成为分割点
             if(nums[i] > right) {
                 pre = i;
             }
+
             // nums[i] <= right
+            // 可以带上前面所有<=right的元素
             if(nums[i] >= left && nums[i] <= right) {
                 f[i] = i - pre;
             }
             // nums[i] < left
+            // 只能跟在前一个元素后面
             if(nums[i] < left) {
                 f[i] = f[i - 1];
             }
