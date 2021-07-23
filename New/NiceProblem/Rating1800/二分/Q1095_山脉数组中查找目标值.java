@@ -8,21 +8,18 @@ package leetcode.contest.Rating1800.二分;
 public class Q1095_山脉数组中查找目标值 {
 //    public int findInMountainArray(int target, MountainArray mountainArr) {
 //        int n = mountainArr.length();
-//        int l = 1, r = n - 1;
+//        int l = 0, r = n - 1;
 //        // 山顶
 //        int m = 0;
-//        int a = 0, b = 0, c = 0;
+//        int c = 0, b = 0;
 //        while(l < r) {
 //            m = (l + r) >>> 1;
-//            a = mountainArr.get(m - 1);
 //            b = mountainArr.get(m);
 //            c = mountainArr.get(m + 1);
-//            if(a < b && b < c) {
+//            if(b < c) {
 //                l = m + 1;
-//            } else if(a > b && b > c) {
-//                r = m;
 //            } else {
-//                break;
+//                r = m;
 //            }
 //        }
 //        // System.out.println(b + " " + m);
