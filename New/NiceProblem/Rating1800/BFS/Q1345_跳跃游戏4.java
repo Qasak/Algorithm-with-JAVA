@@ -11,20 +11,11 @@ public class Q1345_跳跃游戏4 {
     // 1. BFS超内存
     public int minJumps(int[] arr) {
         int n = arr.length;
-        // 值 ：下标
-        // List<int[]> list = new ArrayList<>();
-        // for(int i = 0; i < n; i++) {
-        //     int[] t = new int[]{arr[i], i};
-        //     list.add(t);
-        // }
-        // Collections.sort(list, (a, b) -> (a[0] - b[0]));
-        // 值：{可到达的下标集合}
         Map<Integer, List<Integer>> map = new HashMap<>();
         for(int i = 0; i < n; i++) {
             map.putIfAbsent(arr[i], new ArrayList<>());
             map.get(arr[i]).add(i);
         }
-        // System.out.println(map);
         //BFS
         Deque<int[]> q = new LinkedList<>();
         // 值：下标
