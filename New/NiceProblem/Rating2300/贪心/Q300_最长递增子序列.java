@@ -37,7 +37,7 @@ public class Q300_最长递增子序列 {
             if(nums[i] > f[len]) {
                 f[++len] = nums[i];
             } else {
-                // 找 < nums[i] 的最大末尾元素对应的子序列长度
+                 // 找到第一个小于idx的位置l
                 int l = 0, r = len;
                 while(l < r) {
                     int m = (l + r + 1) >>> 1;
