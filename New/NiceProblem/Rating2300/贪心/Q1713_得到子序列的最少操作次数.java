@@ -24,14 +24,15 @@ public class Q1713_得到子序列的最少操作次数 {
         // f[len] : 长度为len的LIS的最后一个元素的值
         int[] f = new int[n + 1];
         f[0] = -1;
-        int len = 1;
+        int len = 0;
         for(int i : arr) {
             if(map.containsKey(i)) {
                 int idx = map.get(i);
-                if(idx > f[len - 1]) {
-                    f[len++] = idx;
+                if(idx > f[len]) {
+                    f[++len] = idx;
                 } else {
                     int l = 0, r = len;
+                    // 找到第一个小于idx的位置l
                     while(l < r) {
                         int m = (l + r + 1) >>> 1;
                         if(f[m] >= idx) {
@@ -43,9 +44,8 @@ public class Q1713_得到子序列的最少操作次数 {
                     f[l + 1] = idx;
                 }
             }
-            // System.out.println(Arrays.toString(f));
         }
-        return n - len + 1;
+        return n - len;
     }
     public static void main(String[] args) {
         List<Integer> d = new ArrayList<Integer>();
