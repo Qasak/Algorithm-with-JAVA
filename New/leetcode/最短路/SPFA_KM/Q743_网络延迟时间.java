@@ -28,7 +28,7 @@ public class Q743_网络延迟时间 {
         inQue[k] = true;
         q.offer(k);
         while(!q.isEmpty()) {
-            int u = q.pollFirst();
+            int u = q.poll();
             inQue[u] = false;
             List<int[]> list = g.get(u);
             if(list == null) {
@@ -39,7 +39,7 @@ public class Q743_网络延迟时间 {
                 if(dist[v] > dist[u] + w) {
                     dist[v] = dist[u] + w;
                     if(!inQue[v]) {
-                        q.offerLast(v);
+                        q.offer(v);
                         inQue[v] = true;
                     }
                 }
