@@ -40,29 +40,32 @@ public class Q1786_从第一个节点出发到最后一个节点的受限路径�
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[n] = 0;
         // 已松弛的点，按照与源点距离排序
-        PriorityQueue<Integer> q = new PriorityQueue<>((a, b) -> (dist[a] - dist[b]));
-        // Deque<int[]> q = new LinkedList<>();
-        q.offer(n);
+        PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> (a[1] - b[1]));
+        q.offer(new int[]{n, 0});
         while(!q.isEmpty()) {
-            int u = q.poll(), cur = dist[u];
+            int[] p = q.poll();
+            int u = p[0], cur = p[1];
             for(int[] t : map.get(u)) {
                 int v = t[0], w = t[1];
                 if(dist[v] > cur + w) {
                     dist[v] = cur + w;
-                    q.offer(v);
+                    q.offer(new int[]{v, cur + w});
                 }
             }
         }
+        // System.out.println(Arrays.toString(dist));
+        // boolean[] vis = new boolean[n + 1];
         f = new int[n + 1];
-        Arrays.fill(f, -1);
         dfs(1, n,  dist, map);
+
+        // System.out.println(Arrays.toString(f));
         return f[1];
     }
     private int dfs(int u, int n,  int[] dist, Map<Integer, List<int[]>> map) {
         if(u == n) {
             return 1;
         }
-        if(f[u] != -1) {
+        if(f[u] != 0) {
             return f[u];
         }
         int ans = 0;
@@ -75,4 +78,5 @@ public class Q1786_从第一个节点出发到最后一个节点的受限路径�
         }
         return f[u] = ans;
     }
+
 }
