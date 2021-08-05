@@ -10,6 +10,8 @@ import java.util.Arrays;
  * @date 2021/8/5 19:44
  */
 public class LCP34_二叉树染色 {
+    // 时间复杂度 k^2 * n
+    // 空间复杂度 k * n
     int K;
     public int maxValue(TreeNode root, int k) {
         K = k;
