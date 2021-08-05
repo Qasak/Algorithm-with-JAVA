@@ -1,5 +1,8 @@
 package leetcode.contest.Rating1800.DP;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 /**
  * @author Wangjs
  * @version 1.0
@@ -7,7 +10,7 @@ package leetcode.contest.Rating1800.DP;
  */
 public class Q1230_抛掷硬币 {
     // 杨辉三角
-    public double probabilityOfHeads(double[] prob, int target) {
+    public static double probabilityOfHeads(double[] prob, int target) {
         double ans = 1;
         int n = prob.length;
         // f[i][j] 前i个硬币j个正面朝上的概率
@@ -25,10 +28,17 @@ public class Q1230_抛掷硬币 {
                 f[i][j] += f[i - 1][j - 1] * prob[i] + f[i - 1][j] * (1 - prob[i]);
             }
         }
-
+        System.out.println(Arrays.toString(f[n - 1]));
         return f[n - 1][target];
     }
     public static void main(String[] args) {
-        System.out.println(Math.pow(0.5, 5));
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int target = sc.nextInt();
+        double[] nums = new double[n];
+        for(int i = 0; i < n; i++) {
+            nums[i] = sc.nextDouble();
+        }
+        System.out.println(probabilityOfHeads(nums, target));
     }
 }

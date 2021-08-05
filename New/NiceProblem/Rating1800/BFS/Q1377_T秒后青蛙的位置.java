@@ -1,5 +1,7 @@
 package leetcode.contest.Rating1800.BFS;
 
+import java.util.*;
+
 /**
  * @author Wangjs
  * @version 1.0
