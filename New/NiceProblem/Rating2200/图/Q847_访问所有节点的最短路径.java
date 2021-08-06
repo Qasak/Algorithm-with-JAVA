@@ -31,7 +31,7 @@ public class Q847_访问所有节点的最短路径 {
                 }
                 for(int v : graph[u]) {
                     int vStat = stat | (1 << v);
-                    if(vis[v][vStat] == true) {
+                    if(vis[v][vStat]) {
                         continue;
                     }
                     vis[v][vStat] = true;
@@ -42,6 +42,10 @@ public class Q847_访问所有节点的最短路径 {
         return ans;
     }
     // 也可以先将起点放进去
+    // 普通BFS时间复杂度O(V + E)
+    // 状态压缩O((V + E)(2 ^ n))
+    // 边不确定，最坏情况n ^ 2
+    // -> O(n ^ 2 * 2 ^ n)
     public int shortestPathLength1(int[][] graph) {
         int n = graph.length;
         int ans = 0x3f3f3f3f;
@@ -60,7 +64,7 @@ public class Q847_访问所有节点的最短路径 {
             }
             for(int v : graph[u]) {
                 int vStat = stat | (1 << v);
-                if(vis[v][vStat] == true) {
+                if(vis[v][vStat]) {
                     continue;
                 }
                 vis[v][vStat] = true;
