@@ -27,4 +27,5 @@ public class Q264_丑数2 {
         }
         return ans[n - 1];
     }
+
 }

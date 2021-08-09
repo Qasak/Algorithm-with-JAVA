@@ -55,4 +55,54 @@ public class Q313_超级丑数 {
         // System.out.println(Arrays.toString(ans));
         return ans[n - 1];
     }
+
+    // dp去重
+    // 令新生成的丑数尽量最小
+    public int nthSuperUglyNumber2(int n, int[] primes) {
+        // f[i] : 第i个丑数
+        int[] f = new int[n];
+        int m = primes.length;
+        int[] ptr = new int[m];
+        f[0] = 1;
+        for(int i = 1; i < n;) {
+            int min = Integer.MAX_VALUE;
+            int idx = -1;
+            for(int j = 0; j < m; j++) {
+                int cur = primes[j] * f[ptr[j]];
+                if(cur < min) {
+                    min = cur;
+                    idx = j;
+                }
+            }
+            ptr[idx]++;
+            if(min > f[i - 1]) {
+                f[i++] = min;
+            }
+        }
+        return f[n - 1];
+    }
+
+    // dp 一次性去重
+    public int nthSuperUglyNumber3(int n, int[] primes) {
+        // f[i] : 第i个丑数
+        int[] f = new int[n];
+        int m = primes.length;
+        int[] ptr = new int[m];
+        f[0] = 1;
+        for(int i = 1; i < n; i++) {
+            int[] tmp = new int[m];
+            int min = Integer.MAX_VALUE;
+            for(int j = 0; j < m; j++) {
+                tmp[j] = primes[j] * f[ptr[j]];
+                min = Math.min(tmp[j], min);
+            }
+            f[i] = min;
+            for(int j = 0; j < m; j++) {
+                if(tmp[j] == min) {
+                    ptr[j]++;
+                }
+            }
+        }
+        return f[n - 1];
+    }
 }
