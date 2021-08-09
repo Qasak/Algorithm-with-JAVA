@@ -1,4 +1,4 @@
-package leetcode.contest.NiceProblem.DP技巧;
+package leetcode.NiceProblem.DP技巧;
 
 /**
  * @author Wangjs
