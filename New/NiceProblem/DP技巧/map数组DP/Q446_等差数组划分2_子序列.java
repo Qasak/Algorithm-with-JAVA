@@ -10,30 +10,22 @@ import java.util.Map;
  */
 public class Q446_等差数组划分2_子序列 {
     public static int numberOfArithmeticSlices(int[] nums) {
-        // [7,7,7,7,7]
-        //  0 1 3 7
-        // 1 + (1 + 3) + (1 + 3 + 7)
         int n = nums.length;
         if(n < 3) {
             return 0;
         }
         int ans = 0;
         // f[i] [d]: 第i个元素公差为d的子序列长度
-        Map<Integer, Integer>[] f = new Map[n];
+        Map<Long, Integer>[] f = new Map[n];
         for(int i = 0; i < n; i++) {
-            f[i] = new HashMap<Integer, Integer>();
-
+            f[i] = new HashMap<Long, Integer>();
             //map // d : 最大长度
             for(int j = i - 1; j >= 0; j--) {
                 long d = (long)nums[i] - (long)nums[j];
-                if(d < Integer.MIN_VALUE || d > Integer.MAX_VALUE) {
-                    continue;
-                }
-                int dd = (int) d;
-                int pre = f[j].getOrDefault(dd, 0);
-                int cur = f[i].getOrDefault(dd, 0);
+                int pre = f[j].getOrDefault(d, 0);
+                int cur = f[i].getOrDefault(d, 0);
                 ans += pre;
-                f[i].put(dd, pre + cur + 1);
+                f[i].put(d, pre + cur + 1);
             }
         }
         return ans;
