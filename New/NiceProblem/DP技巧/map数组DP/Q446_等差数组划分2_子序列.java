@@ -11,9 +11,6 @@ import java.util.Map;
 public class Q446_等差数组划分2_子序列 {
     public static int numberOfArithmeticSlices(int[] nums) {
         int n = nums.length;
-        if(n < 3) {
-            return 0;
-        }
         int ans = 0;
         // f[i] [d]: 第i个元素公差为d的等差子序列个数
         Map<Long, Integer>[] f = new Map[n];
