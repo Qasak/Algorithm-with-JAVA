@@ -15,7 +15,7 @@ public class Q446_等差数组划分2_子序列 {
             return 0;
         }
         int ans = 0;
-        // f[i] [d]: 第i个元素公差为d的子序列长度
+        // f[i] [d]: 第i个元素公差为d的等差子序列个数
         Map<Long, Integer>[] f = new Map[n];
         for(int i = 0; i < n; i++) {
             f[i] = new HashMap<Long, Integer>();
