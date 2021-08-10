@@ -1,4 +1,4 @@
-package leetcode.contest.NiceProblem.滑动窗口技巧;
+package leetcode.NiceProblem.滑动窗口技巧;
 
 /**
  * @author Wangjs
