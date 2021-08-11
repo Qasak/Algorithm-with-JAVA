@@ -16,6 +16,7 @@ public class Q368_最大整除子集 {
         Arrays.sort(nums);
         int len = 0;
         int idx = 0;
+        // f[i] : 以i结尾的元素的最大整除子集
         List<TreeSet<Integer>> f = new ArrayList<>();
         f.add(new TreeSet<>());
         f.get(0).add(nums[0]);
@@ -24,7 +25,7 @@ public class Q368_最大整除子集 {
             int pre = -1;
             int size = 0;
             for(int j = 0; j < i; j++) {
-                if(f.get(j).last() % nums[i] == 0 || nums[i] % f.get(j).last() == 0) {
+                if(nums[i] % f.get(j).last() == 0) {
                     if(f.get(j).size() > size) {
                         pre = j;
                         size = f.get(j).size();
@@ -32,8 +33,9 @@ public class Q368_最大整除子集 {
                 }
             }
 
-            if(pre != -1)
+            if(pre != -1) {
                 cur.addAll(f.get(pre));
+            }
             cur.add(nums[i]);
             f.add(cur);
             if(cur.size() > len) {
@@ -43,5 +45,41 @@ public class Q368_最大整除子集 {
 
         }
         return new ArrayList<>(f.get(idx));
+    }
+
+
+    public List<Integer> largestDivisibleSubset1(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        // 以i结尾的元素的最大子集长度
+        int[] f = new int[n];
+        // 以i结尾的元素从哪里转移来
+        int[] g = new int[n];
+        // 最大长度及其元素下标
+        int max = 1;
+        int idx = 0;
+        Arrays.fill(f, 1);
+        for(int i = 1; i < n; i++) {
+            int len = 1, pre = i;
+            for(int j = 0; j < i; j++) {
+                if(nums[i] % nums[j] == 0 && f[j] + 1 > len) {
+                    pre = j;
+                    len = f[j] + 1;
+                }
+
+            }
+            if(len > max) {
+                max = len;
+                idx = i;
+            }
+            g[i] = pre;
+            f[i] = len;
+        }
+        List<Integer> ans = new ArrayList<>();
+        while(ans.size() < max) {
+            ans.add(nums[idx]);
+            idx = g[idx];
+        }
+        return ans;
     }
 }
