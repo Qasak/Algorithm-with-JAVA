@@ -14,9 +14,9 @@ public class Q1035_不相交的线 {
         for(int i = 1; i < n + 1; i++) {
             for(int j = 1; j < m + 1; j++) {
                 if(nums1[i - 1] == nums2[j - 1]) {
-                    f[i][j] = Math.max(f[i][j], f[i - 1][j - 1]) + 1;
+                    f[i][j] = f[i - 1][j - 1] + 1;
                 } else {
-                    f[i][j] = Math.max(f[i][j], Math.max(f[i - 1][j], f[i][j - 1]));
+                    f[i][j] = Math.max(f[i - 1][j], f[i][j - 1]);
                 }
             }
         }
