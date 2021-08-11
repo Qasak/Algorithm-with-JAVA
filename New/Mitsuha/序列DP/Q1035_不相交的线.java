@@ -6,6 +6,12 @@ package Mitsuha.序列DP;
  * @date 2021/8/11 18:04
  */
 public class Q1035_不相交的线 {
+    // f[i][j] 代表考虑 s1s1 的前 ii 个字符、考虑 s2s2 的前 jj 的字符，形成的最长公共子序列长度。
+    //
+    //然后不失一般性的考虑 f[i][j]f[i][j] 如何转移。
+    //
+    //由于我们的「状态定义」只是说「考虑前 ii 个和考虑前 jj 个字符」，并没有说「一定要包含第 ii 个或者第 jj 个字符」（这也是「最长公共子序列 LCS」与「最长上升子序列 LIS」状态定义上的最大不同）。
+    // 也就是所谓的第i个和前i个的区别
     public int maxUncrossedLines(int[] nums1, int[] nums2) {
         int n = nums1.length;
         int m = nums2.length;
