@@ -8,6 +8,7 @@ import java.util.Arrays;
  * @date 2021/8/11 15:47
  */
 public class Q740_删除并获得点数 {
+    // 「序列 DP」问题（选择某个数，需要考虑前一个数的「大小/选择」状态）
     public int deleteAndEarn(int[] nums) {
         // f[i][0] 不选数值为i的数字的最大点数
         // f[i][1] 选数值为i的数字的最大点数
