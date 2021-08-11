@@ -47,7 +47,8 @@ public class Q368_最大整除子集 {
         return new ArrayList<>(f.get(idx));
     }
 
-
+    // 当我们决策到某一个数 nums[i] 时（nums 已排好序），我们无法直接将 nums[i] 直接接在符合「约数关系」的、最靠近位置 i 的数后面，
+    // 而是要检查位置 i 前面的所有符合「约数关系」的位置，找一个已经形成「整除子集」长度最大的数。
     public List<Integer> largestDivisibleSubset1(int[] nums) {
         int n = nums.length;
         Arrays.sort(nums);
