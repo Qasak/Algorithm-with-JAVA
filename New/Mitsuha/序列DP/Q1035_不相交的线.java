@@ -1,5 +1,8 @@
 package Mitsuha.序列DP;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * @author Wangjs
  * @version 1.0
@@ -27,5 +30,9 @@ public class Q1035_不相交的线 {
             }
         }
         return f[n][m];
+    }
+
+    public static void main(String[] args) {
+        String a = "ab";
     }
 }
