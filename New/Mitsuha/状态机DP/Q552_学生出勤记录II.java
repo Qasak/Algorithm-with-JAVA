@@ -56,7 +56,7 @@ public class Q552_学生出勤记录II {
         f[0][0][0] = 1;
         for(int i = 1; i < n; i++) {
             // A L P
-            // A
+            // A : 当前为A, 所有连续的L中断
             for(int k = 0; k < 3; k++) {
                 f[i][1][0] = (f[i][1][0] + f[i - 1][0][k]) % mod;
             }
