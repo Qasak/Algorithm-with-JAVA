@@ -26,7 +26,9 @@ public class Q576_出界的路径数 {
         }
         int k = maxMove - cur;
         // 剪枝
-        if(i > k && N - i > k && j > k && M - j > k) return 0;
+        if(i > k && N - i > k && j > k && M - j > k) {
+            return 0;
+        }
         if(f[i][j][cur] != 0) {
             return f[i][j][cur];
         }
