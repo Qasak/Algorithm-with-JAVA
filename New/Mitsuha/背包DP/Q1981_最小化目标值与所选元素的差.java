@@ -1,5 +1,7 @@
 package Mitsuha.背包DP;
 
+import java.util.Arrays;
+
 /**
  * @author Wangjs
  * @version 1.0
@@ -38,14 +40,20 @@ public class Q1981_最小化目标值与所选元素的差 {
     // 分组背包
     public int minimizeTheDifference1(int[][] mat, int target) {
         int n = mat.length, m = mat[0].length;
-        boolean[][] f = new boolean[n][4901];
+        int sum = 0;
+        for(int i = 0; i < n; i++) {
+            int max = Arrays.stream(mat[i]).max().getAsInt();
+            sum += max;
+        }
+
+        boolean[][] f = new boolean[n][sum + 1];
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < m; j++) {
                 if(i == 0) {
                     f[i][mat[i][j]] = true;
                     continue;
                 }
-                for(int cur = mat[i][j]; cur <= 4900; cur++) {
+                for(int cur = mat[i][j]; cur <= sum; cur++) {
                     if(i > 0 && f[i - 1][cur - mat[i][j]]) {
                         f[i][cur] = true;
                     }
@@ -53,11 +61,12 @@ public class Q1981_最小化目标值与所选元素的差 {
             }
         }
         int ret = 0x3f3f3f3f;
-        for(int i = 0; i <= 4900; i++) {
+        for(int i = 0; i <= sum; i++) {
             if(f[n - 1][i]) {
                 ret = Math.min(ret, Math.abs(target - i));
             }
         }
         return ret;
     }
+    // 优化
 }
