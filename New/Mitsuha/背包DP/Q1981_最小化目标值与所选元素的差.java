@@ -5,7 +5,7 @@ package Mitsuha.背包DP;
  * @version 1.0
  * @date 2021/8/23 18:45
  */
-public class Q5852_最小化目标值与所选元素的差 {
+public class Q1981_最小化目标值与所选元素的差 {
     // 记忆化
     int diff = 0x3f3f3f3f;
     int n;
@@ -36,5 +36,28 @@ public class Q5852_最小化目标值与所选元素的差 {
         }
     }
     // 分组背包
-
+    public int minimizeTheDifference1(int[][] mat, int target) {
+        int n = mat.length, m = mat[0].length;
+        boolean[][] f = new boolean[n][4901];
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j++) {
+                if(i == 0) {
+                    f[i][mat[i][j]] = true;
+                    continue;
+                }
+                for(int cur = mat[i][j]; cur <= 4900; cur++) {
+                    if(i > 0 && f[i - 1][cur - mat[i][j]]) {
+                        f[i][cur] = true;
+                    }
+                }
+            }
+        }
+        int ret = 0x3f3f3f3f;
+        for(int i = 0; i <= 4900; i++) {
+            if(f[n - 1][i]) {
+                ret = Math.min(ret, Math.abs(target - i));
+            }
+        }
+        return ret;
+    }
 }
