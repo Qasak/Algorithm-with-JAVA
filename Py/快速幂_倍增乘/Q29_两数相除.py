@@ -15,18 +15,16 @@ class Solution:
             b = -b
         l = 0
         r = a
-        ans = l
-        while(l <= r):
+        # (]
+        while(l < r):
+            # print(l)
+            # print(r)
             m = (l + r + 1) >> 1
-            cur = mul(b, m)
-            if(cur > a):
+            if(mul(b, m) > a):
                 r = m - 1
-            elif(cur < a):
-                ans = m
-                l = m + 1
             else:
-                ans = m
-                break
+                l = m
+        ans = l
         if(isNeg):
             ans = -ans
         if(ans > 2147483647 or ans < -2147483648):
