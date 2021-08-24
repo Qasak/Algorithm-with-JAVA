@@ -21,12 +21,11 @@ class Solution:
             tmp[idx] = nums[i]
             idx += 1
             i += 1
-        while(j <= r) :
+        while(j <= r):
             tmp[idx] = nums[j]
             idx += 1
             j += 1
-        for k in range(l, r + 1):
-            nums[k] = tmp[k]
+        nums[l : r + 1] = tmp[l : r + 1]
     def sortArray(self, nums: List[int]) -> List[int]:
         n = len(nums)
         tmp = [0] * n
