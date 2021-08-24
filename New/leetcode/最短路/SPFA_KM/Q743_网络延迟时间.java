@@ -46,7 +46,6 @@ public class Q743_网络延迟时间 {
             }
         }
         int ans = Arrays.stream(dist).max().getAsInt();
-        // System.out.println(Arrays.toString(dist));
         return ans == INF ? -1 : ans;
     }
 }
