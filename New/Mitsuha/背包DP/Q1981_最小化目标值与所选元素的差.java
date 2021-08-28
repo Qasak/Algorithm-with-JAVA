@@ -38,6 +38,8 @@ public class Q1981_最小化目标值与所选元素的差 {
         }
     }
     // 分组背包
+    // 求出可以组合出的和的类型
+    // 和的类型总数是稀疏的
     public int minimizeTheDifference1(int[][] mat, int target) {
         int n = mat.length, m = mat[0].length;
         int sum = 0;
@@ -54,7 +56,7 @@ public class Q1981_最小化目标值与所选元素的差 {
                     continue;
                 }
                 for(int cur = mat[i][j]; cur <= sum; cur++) {
-                    if(i > 0 && f[i - 1][cur - mat[i][j]]) {
+                    if(f[i - 1][cur - mat[i][j]]) {
                         f[i][cur] = true;
                     }
                 }
