@@ -17,3 +17,22 @@ class Solution {
         return dp[N][C];
     }
 }
+// 空间优化
+class Solution {
+    public int maxValue(int N, int C, int[] S, int[][] v, int[][] w) {
+        int[] dp = new int[C + 1];
+        for (int i = 1; i <= N; i++) {
+            int[] vi = v[i - 1];
+            int[] wi = w[i - 1];
+            int si = S[i - 1];
+            for (int j = C; j >= 0; j--) {
+                for (int k = 0; k < si; k++) {
+                    if (j >= vi[k]) {
+                        dp[j] = Math.max(dp[j], dp[j - vi[k]] + wi[k]);
+                    }
+                }
+            }
+        }
+        return dp[C];
+    }
+}
