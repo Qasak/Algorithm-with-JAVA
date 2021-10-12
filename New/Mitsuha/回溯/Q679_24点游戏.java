@@ -48,4 +48,7 @@ public class Q679_24点游戏 {
             }
             return list;
         }
+
+    public static void main(String[] args) {
+    }
 }
