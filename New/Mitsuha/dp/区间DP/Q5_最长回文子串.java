@@ -38,5 +38,7 @@ public class Q5_最长回文子串 {
     }
 
     // 马拉车
+    public static void main(String[] args) {
 
+    }
 }

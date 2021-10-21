@@ -3,7 +3,7 @@ package NiceProblem.Week258;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Q2_可互换举行的组数 {
+public class Q2_可互换矩形的组数 {
     class Solution {
         public long interchangeableRectangles(int[][] rectangles) {
             int n = rectangles.length;

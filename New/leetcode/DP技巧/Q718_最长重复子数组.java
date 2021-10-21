@@ -22,4 +22,8 @@ public class Q718_最长重复子数组 {
         }
         return ans;
     }
+
+    public static void main(String[] args) {
+
+    }
 }
